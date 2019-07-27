@@ -4,7 +4,9 @@ import { CarsList } from './Cars.js';
 
 class App extends Component {
 	
-	cars = []
+	state = {
+		cars: []
+	}
 
 	componentDidMount() {
         fetch('./cars')
@@ -13,7 +15,6 @@ class App extends Component {
           this.setState({ cars: data })
         })
 		.catch(console.log);
-		alert("fetched");
     }
 
 	render() {
@@ -21,7 +22,7 @@ class App extends Component {
 			<div>
 			<h1>Hallo Einfo</h1>
 			<div className="App">
-				<CarsList cars={this.cars} />
+				<CarsList cars={this.state.cars} />
 			</div>
 			</div>
 		);

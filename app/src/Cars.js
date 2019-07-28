@@ -1,10 +1,16 @@
 import React from 'react';
+import './Cars.css';
 
 function CarCard(props) {
+	console.log(props);
+	const style = {
+		backgroundImage: 'url(http://localhost:1337' + props.car.thumbnail.url + ')'
+	};
 	return (
-		<div>
-			<img src={props.car.thumbnail.url} />
-			<p>{props.car.manufacturer} {props.car.model} {props.car.edition}</p>
+		<div style={style} className="Car-card">
+			<div className="Car-cardOverlay">
+				<h3>{props.car.manufacturer} {props.car.model} {props.car.edition}</h3>
+			</div>
 		</div>
 	);
 }
@@ -12,7 +18,7 @@ function CarCard(props) {
 export function CarsList(props) {
 	const carsCards = props.cars.map(car => <CarCard car={car}/>);
 	return (
-		<div>
+		<div className="Car-list">
 			{carsCards}
 		</div>
 	);

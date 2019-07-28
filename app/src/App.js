@@ -9,11 +9,11 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-        fetch('./cars')
+        fetch('http://localhost:1337/cars')
         .then(res => res.json())
         .then((data) => {
-          this.setState({ cars: data })
-        })
+        	this.setState({ cars: data })
+		})
 		.catch(console.log);
     }
 

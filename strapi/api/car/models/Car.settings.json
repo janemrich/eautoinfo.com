@@ -24,6 +24,15 @@
       "model": "file",
       "via": "related",
       "plugin": "upload"
+    },
+    "Range": {
+      "type": "integer"
+    },
+    "Efficiency": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "integer"
     }
   }
 }

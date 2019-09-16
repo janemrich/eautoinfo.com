@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { CarsList } from './Cars.js';
+import { Bar } from './Bar.js';
 
 class App extends Component {
 	
@@ -19,12 +20,10 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
-			<h1>Hallo Einfo</h1>
-			<div className="App">
-				<CarsList cars={this.state.cars} />
-			</div>
-			</div>
+				<div className="App">
+					<Bar />
+					<CarsList cars={this.state.cars} />
+				</div>
 		);
 	}
 

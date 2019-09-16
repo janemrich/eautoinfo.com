@@ -43,7 +43,7 @@
     {
       "method": "DELETE",
       "path": "/cars/:id",
-      "handler": "Car.delete",
+      "handler": "Car.destroy",
       "config": {
         "policies": []
       }

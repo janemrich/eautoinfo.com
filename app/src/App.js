@@ -10,7 +10,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-        fetch('http://localhost:1337/cars')
+        fetch('https://api.eautoinfo.com/cars')
         .then(res => res.json())
         .then((data) => {
         	this.setState({ cars: data })

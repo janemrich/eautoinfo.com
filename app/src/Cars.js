@@ -5,13 +5,13 @@ import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMed
 function CarCard(props) {
 	console.log(props);
 	const style = {
-		backgroundImage: 'url(http://localhost:1337' + props.car.thumbnail.url + ')',
+		backgroundImage: 'url(https://api.eautoinfo.com' + props.car.thumbnail.url + ')',
 	};
 	return (
 		<Card className="car-card">
 			<CardActionArea>
 				<CardMedia className="car-media"
-					image={'http://localhost:1337' + props.car.thumbnail.url}
+					image={'https://api.eautoinfo.com' + props.car.thumbnail.url}
 				/>
 				<CardContent>
 					<Typography variant="h6" component="h2">

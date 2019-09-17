@@ -18,14 +18,14 @@ function CarCard(props) {
             			{ props.car.manufacturer + ' ' + props.car.model + ' ' + props.car.edition}
           			</Typography>
 					<Typography color="h6" component="h2">
-            			{ (props.car.price).toLocaleString('de-DE', {
+            			{ (props.car.price_de).toLocaleString('de-DE', {
 																			style: 'currency',
 																			currency: 'EUR',
 																			maximumFractionDigits: '2',}) }
           			</Typography>
 					<Typography component="p">
-          	{ 'Reichweite: ' +  props.car.Range + ' km' } <br />
-						{ 'Effizienz: ' +  props.car.Efficiency + ' kWh/100km' }
+          	{ 'Reichweite: ' +  props.car.range_wlpt + ' km' } <br />
+						{ 'Effizienz: ' +  props.car.efficiency + ' kWh/100km' }
 					</Typography>
 				</CardContent>
 			</CardActionArea>

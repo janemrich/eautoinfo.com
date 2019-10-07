@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
+import { Route, Redirect } from "react-router";
 
 class App extends Component {
 	
 	state = {
-		cars: []
+		cars: [],
+		toDetail: null,
+	}
+
+	handleCardClick(id) {
+		this.setState({
+			toDetail: id,
+		})
 	}
 
 	componentDidMount() {
@@ -19,10 +27,17 @@ class App extends Component {
     }
 
 	render() {
+		if (this.state.toDetail) {
+			return <Redirect to={'/car/' + this.state.toDetail} />
+		}
+
 		return (
 				<div className="App">
 					<Bar />
-					<CarsList cars={this.state.cars} />
+					<p>{this.state.name}</p>
+					<CarsList cars={this.state.cars}
+						onClick={(id) => this.handleCardClick(id)}
+					/>
 				</div>
 		);
 	}

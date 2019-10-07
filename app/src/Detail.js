@@ -1,16 +1,51 @@
-import React from 'react';
-import './Cars.css';
+import React from 'react' 
 import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMedia, CardHeader, CardText} from '@material-ui/core';
+import {Bar} from './Bar.js'
 
-function CarCard(props) {
+class Detail extends React.Component {
+  state = {
+    cars: [],
+  }
+
+  componentDidMount() {
+    fetch('https://api.eautoinfo.com/cars/' + this.props.match.params.id)
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ cars: [data]})
+		})
+    .catch(console.log);
+  }
+
+  render() {
+		return (
+				<div className="App">
+					<Bar />
+					<CarsListb cars={this.state.cars}/>
+				</div>
+		);
+	}
+}
+
+function CarsListb(props) {
+	const carsCards = props.cars.map(car => <CarCardb car={car} />);
+
+	return (
+		<Box className="Car-list"> 
+			{carsCards}
+		</Box>
+	);
+}
+
+function CarCardb(props) {
 	console.log(props);
 
 	const style = {
 		backgroundImage: 'url(https://api.eautoinfo.com' + props.car.thumbnail.url + ')',
 	};
+
 	return (
 		<Card className="car-card"  >
-			<CardActionArea onClick={ () => props.onClick(props.car.id) }>
+			<CardActionArea>
 				<CardMedia className="car-media"
 					image={'https://api.eautoinfo.com' + props.car.thumbnail.url}
 				/>
@@ -34,17 +69,8 @@ function CarCard(props) {
 				</CardContent>
 			</CardActionArea>
 		</Card>
+		
 	);
 }
 
-export function CarsList(props) {
-	const carsCards = props.cars.map(car => <CarCard
-												car={car}
-												onClick={(id) => props.onClick(id) }
-											/>);
-	return (
-		<Box className="Car-list"> 
-			{carsCards}
-		</Box>
-	);
-}
+export default Detail

@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Link from '@material-ui/core/Link'
+import { mergeClasses } from '@material-ui/styles';
 
 
 	const useStyles = makeStyles(theme => ({
@@ -16,10 +18,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 	    marginRight: theme.spacing(2),
 	  },
 	  title: {
-	    flexGrow: 1,
+      flexGrow: 1,
+      cursor: 'pointer',
 	  },
-	}));
-
+  }));
+  
 export function Bar(props) {
 	console.log(props);
   const classes = useStyles();
@@ -31,9 +34,14 @@ export function Bar(props) {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            EAutoinfo
+          <Typography onClick={ () => alert('hi2')} variant="h6" className={classes.title}>
+            e auto info
           </Typography>
+          <Link href={"http://blog.eautoinfo.com"} className={classes.link}>
+            <Button variant='contained' color='default'>
+            Blog
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

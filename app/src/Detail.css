@@ -1,0 +1,14 @@
+.Detail-paper {
+    margin: auto;
+    overflow:auto;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.Detail-name {
+    padding: 10px;
+}
+
+.Detail-price {
+    padding: 10px;
+}

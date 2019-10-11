@@ -33,7 +33,7 @@ class App extends Component {
 
 		return (
 				<div className="App">
-					<Bar />
+					<Bar onClick={alert('hi')}/>
 					<p>{this.state.name}</p>
 					<CarsList cars={this.state.cars}
 						onClick={(id) => this.handleCardClick(id)}

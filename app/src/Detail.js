@@ -1,6 +1,8 @@
 import React from 'react' 
-import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMedia, CardHeader, CardText} from '@material-ui/core';
+import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMedia, CardHeader, CardText, Paper} from '@material-ui/core';
 import {Bar} from './Bar.js'
+import { classes } from 'istanbul-lib-coverage';
+import './Detail.css';
 
 class Detail extends React.Component {
   state = {
@@ -44,32 +46,25 @@ function CarCardb(props) {
 	};
 
 	return (
-		<Card className="car-card"  >
-			<CardActionArea>
-				<CardMedia className="car-media"
-					image={'https://api.eautoinfo.com' + props.car.thumbnail.url}
-				/>
-				<CardContent>
-					<Typography variant="h6" component="h2">
-						{ props.car.manufacturer
-							+ ' ' + props.car.model
-							+ ' ' + props.car.edition
-						}
-          			</Typography>
-					<Typography color="h6" component="h2">
-            			{ (props.car.price_de).toLocaleString('de-DE', {
-								style: 'currency',
-								currency: 'EUR',
-								maximumFractionDigits: '2',}) }
-          			</Typography>
-					<Typography component="p">
-          				{ 'Reichweite: ' +  props.car.range_wlpt + ' km' } <br />
-						{ 'Effizienz: ' +  props.car.efficiency + ' kWh/100km' }
-					</Typography>
-				</CardContent>
-			</CardActionArea>
-		</Card>
-		
+		<Paper className="Detail-paper">
+			<h1 className="Detail-name">
+				{ props.car.manufacturer
+					+ ' ' + props.car.model
+					+ ' ' + props.car.edition
+				}
+			</h1>
+			<img src={ 'https://api.eautoinfo.com' + props.car.thumbnail.url}></img>
+			<h2 className="Detail-price">
+				{ (props.car.price_de).toLocaleString('de-DE', {
+						style: 'currency',
+						currency: 'EUR',
+						maximumFractionDigits: '2',}) }
+			</h2>
+			<Typography component="p">
+				{ 'Reichweite: ' +  props.car.range_wlpt + ' km' } <br />
+				{ 'Effizienz: ' +  props.car.efficiency + ' kWh/100km' }
+			</Typography>
+		</Paper>
 	);
 }
 

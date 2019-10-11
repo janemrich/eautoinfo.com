@@ -3,10 +3,12 @@ import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMed
 import {Bar} from './Bar.js'
 import { classes } from 'istanbul-lib-coverage';
 import './Detail.css';
+import { Redirect } from 'react-router';
 
 class Detail extends React.Component {
   state = {
-    cars: [],
+	cars: [],
+	showDetail: true,
   }
 
   componentDidMount() {
@@ -18,10 +20,18 @@ class Detail extends React.Component {
     .catch(console.log);
   }
 
+  handleMainClick() {
+	  this.setState({ showDetail: false });
+  }
+
   render() {
+	if (!this.state.showDetail) {
+		return <Redirect to={'/'}></Redirect>
+	}
 		return (
 				<div className="App">
-					<Bar />
+					<Bar onClick={ () => this.handleMainClick()}
+					/>
 					<CarsListb cars={this.state.cars}/>
 				</div>
 		);

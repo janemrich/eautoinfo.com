@@ -26,6 +26,11 @@ class App extends Component {
 		.catch(console.log);
     }
 
+	handleMainClick() {
+		this.setState({
+			toDetail: null,
+		})
+	}
 	render() {
 		if (this.state.toDetail) {
 			return <Redirect to={'/car/' + this.state.toDetail} />
@@ -33,7 +38,7 @@ class App extends Component {
 
 		return (
 				<div className="App">
-					<Bar onClick={alert('hi')}/>
+					<Bar onClick={ () => this.handleMainClick()}/>
 					<p>{this.state.name}</p>
 					<CarsList cars={this.state.cars}
 						onClick={(id) => this.handleCardClick(id)}

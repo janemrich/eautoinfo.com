@@ -34,7 +34,7 @@ export function Bar(props) {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography onClick={ () => alert('hi2')} variant="h6" className={classes.title}>
+          <Typography onClick={ () => props.onClick()} variant="h6" className={classes.title}>
             e auto info
           </Typography>
           <Link href={"http://blog.eautoinfo.com"} className={classes.link}>

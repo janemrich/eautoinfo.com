@@ -1,8 +1,9 @@
 .Detail-paper {
     margin: auto;
     overflow:auto;
-    padding: 5px;
-    margin-top: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 95%;
 }
 
 .Detail-name {
@@ -11,4 +12,9 @@
 
 .Detail-price {
     padding: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: 300px;
 }

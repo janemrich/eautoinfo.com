@@ -1,7 +1,6 @@
 import React from 'react' 
-import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMedia, CardHeader, CardText, Paper} from '@material-ui/core';
+import { Box, Paper} from '@material-ui/core';
 import {Bar} from './Bar.js'
-import { classes } from 'istanbul-lib-coverage';
 import './Detail.css';
 import { Redirect } from 'react-router';
 
@@ -56,6 +55,7 @@ function CarCardb(props) {
 	};
 
 	return (
+		<>
 		<Paper className="Detail-paper">
 			<h1 className="Detail-name">
 				{ props.car.manufacturer
@@ -70,11 +70,30 @@ function CarCardb(props) {
 						currency: 'EUR',
 						maximumFractionDigits: '2',}) }
 			</h2>
-			<Typography component="p">
-				{ 'Reichweite: ' +  props.car.range_wlpt + ' km' } <br />
-				{ 'Effizienz: ' +  props.car.efficiency + ' kWh/100km' }
-			</Typography>
 		</Paper>
+		<Paper className="Detail-paper">
+			<div className="info-box">
+			<div class="flex-container">
+				<div className="row">
+					<div className="row-title">
+						{ 'Reichweite: ' }
+					</div>
+					<div className="row-cell">
+						{ props.car.range_wlpt + ' km' }
+					</div>
+				</div>
+				<div className="row">
+					<div className="row-title">
+						{ 'Effizienz: ' }
+					</div>
+					<div className="row-cell">
+						{ props.car.efficiency + ' kWh/100km' }
+					</div>
+				</div>
+			</div>
+			</div>
+		</Paper>
+		</>
 	);
 }
 

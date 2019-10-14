@@ -5,19 +5,21 @@ import { Bar } from './Bar.js';
 import { Redirect } from "react-router";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { Paper } from '@material-ui/core';
+import { Paper, Box } from '@material-ui/core';
 
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.handlePriceChange = this.handlePriceChange.bind(this);
+		this.handleRangeChange = this.handleRangeChange.bind(this);
 	}
 	
 	state = {
 		cars: [],
 		toDetail: null,
 		price: "",
+		range: "",
 	}
 
 	handleCardClick(id) {
@@ -47,6 +49,12 @@ class App extends Component {
 		})
 	}
 
+	handleRangeChange(event) {
+		this.setState({
+			range: event.target.value,
+		})
+	}
+
 	render() {
 		if (this.state.toDetail) {
 			return <Redirect to={'/car/' + this.state.toDetail} />
@@ -55,15 +63,18 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					<Paper className="filters">
-						<Filter
-							onChange={this.handlePriceChange }
-							value={this.state.price}
-						/>
-					</Paper>	
+					<Filter
+						onPriceChange={ this.handlePriceChange }
+						price={this.state.price}
+						onRangeChange={ this.handleRangeChange }
+						range={this.state.range}
+					/>
 					<CarsList
 						cars={ this.state.cars.filter(
-							car => car.price_de > this.state.price)}
+							car => car.price_de > this.state.price
+							).filter(
+								car => car.range_wlpt > this.state.range
+							)}
 						onClick={(id) => this.handleCardClick(id)}
 					/>
 				</div>
@@ -76,17 +87,35 @@ export default App;
 
 function Filter(props) {
 	return (
-		<TextField
-			id="outlined-adornment-amount"
-			//className={clsx(classes.margin, classes.textField)}
-			variant="outlined"
-			label="Preis ab"
-			value={props.value}
-			onChange={ props.onChange }
-			InputProps={{
-			startAdornment: <InputAdornment position="start">€</InputAdornment>,
-			}}
-		/>
-		
+		<Paper className="filters">
+			<Box className="filter-inputs">
+			<div className="textField">
+			<TextField
+				className="textInput"
+				id="outlined-adornment-amount"
+				variant="outlined"
+				label="Preis ab"
+				value={props.price}
+				onChange={ props.onPriceChange }
+				InputProps={{
+				startAdornment: <InputAdornment position="start">€</InputAdornment>,
+				}}
+			/>
+			</div>
+			<div className="textField">
+			<TextField
+				className="textInput"
+				id="outlined-adornment-amount"
+				variant="outlined"
+				label="Reichweite ab"
+				value={props.range}
+				onChange={ props.onRangeChange }
+				InputProps={{
+				startAdornment: <InputAdornment position="start">km</InputAdornment>,
+				}}
+			/>
+			</div>
+			</Box>
+		</Paper>
 	)
 }

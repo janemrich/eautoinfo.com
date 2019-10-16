@@ -57,6 +57,22 @@
 	margin: 3px !important;
 }
 
+.cars-to-compare {
+	position: fixed;
+	bottom: 0px;
+	display: flex;
+	flex-direction: column;
+	padding: 4px;
+}
+
+.car-chip {
+	margin: 4px;
+}
+
+.MuiChip-label {
+	width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
 	.textField {
 		width: 150px;

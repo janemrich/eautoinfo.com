@@ -37,6 +37,14 @@
 	//margin: 20px;
 }
   
+.add-button {
+	color: default;
+}
+
+.card-content {
+	padding: 2px !important;
+}
+
 .Car-cardOverlay {
 	display: block;
 	position: absolute;

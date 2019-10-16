@@ -5,7 +5,7 @@ import { Bar } from './Bar.js';
 import { Redirect } from "react-router";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { Paper, Box, Icon } from '@material-ui/core';
+import { Paper, Box, Icon, Avatar } from '@material-ui/core';
 
 
 import IconButton from '@material-ui/core/IconButton';
@@ -22,6 +22,8 @@ class App extends Component {
 	
 	state = {
 		cars: [],
+		carsToCompare: [],
+		carsToCompareThumbs: [],
 		toDetail: null,
 		price: "",
 		range: "",
@@ -31,6 +33,24 @@ class App extends Component {
 	handleCardClick(id) {
 		this.setState({
 			toDetail: id,
+		})
+	}
+
+	handleAddClick(id) {
+		this.setState({
+			carsToCompare: this.state.carsToCompare.concat(
+				this.state.cars.find(
+					car => car.id == id
+				)
+			),
+		})
+	}
+
+	handleDelete(id) {
+		this.setState({
+			carsToCompare: this.state.carsToCompare.filter(
+				car => car.id !== id
+			)
 		})
 	}
 
@@ -100,6 +120,7 @@ class App extends Component {
 
 		return (
 				<div className="App">
+					{this.state.carsToCompare.length}
 					<Bar onClick={ () => this.handleMainClick()}/>
 					<Filter
 						onPriceChange={ this.handlePriceChange }
@@ -112,7 +133,21 @@ class App extends Component {
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}
+						onAddClick={(id) => this.handleAddClick(id) }
 					/>
+					{this.state.carsToCompare.length > 0 &&
+						<Paper className="cars-to-compare">
+							<Button variant="outlined"> vergleiche</Button>
+							{ this.state.carsToCompare.map(
+								car => <Chip
+											className="car-chip"
+											avatar={<Avatar src={'https://api.eautoinfo.com' + car.thumbnail.url} />}
+											onDelete={() => this.handleDelete(car.id)}
+											label={car.model}
+										/>
+							)}
+						</Paper>
+					}
 				</div>
 		);
 	}
@@ -151,9 +186,7 @@ function Filter(props) {
 			/>
 			</div>
 			</Box>
-			<IconButton> 
-				<FilterListIcon /> 
-			</IconButton>
+			<FilterListIcon /> 
 			<Chip
 				className="filter-chip"
 				{...((props.sortby == 'price') ? {color: 'primary'} : {})}

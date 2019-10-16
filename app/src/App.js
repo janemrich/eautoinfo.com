@@ -67,6 +67,32 @@ class App extends Component {
 		})
 	}
 
+	selectCarList(cars) {
+		let filtered_cars =
+			cars.filter(
+				car => car.price_de > this.state.price
+			).filter(
+				car => car.range_wlpt > this.state.range
+			);
+		switch (this.state.sortby) {
+			case 'price':
+				return filtered_cars.sort(
+					(a, b) => (a.price_de > b.price_de) ? 1 : -1
+				)
+			break;
+			case 'range':
+				return filtered_cars.sort(
+					(a, b) => (a.range_wlpt < b.range_wlpt) ? 1 : -1
+				)
+			break;
+			case 'efficiency':
+				return filtered_cars.sort(
+					(a, b) => (a.efficiency > b.efficiency) ? 1 : -1
+				)
+			break;
+		}
+	}
+
 	render() {
 		if (this.state.toDetail) {
 			return <Redirect to={'/car/' + this.state.toDetail} />
@@ -84,13 +110,7 @@ class App extends Component {
 						onSortChange={(type) => this.handleSortChange(type)}
 					/>
 					<CarsList
-						cars={ this.state.cars.filter(
-							car => car.price_de > this.state.price
-							).filter(
-								car => car.range_wlpt > this.state.range
-							).sort(
-								(a, b) => (a.price_de > b.price_de) ? 1 : -1
-							)}
+						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}
 					/>
 				</div>

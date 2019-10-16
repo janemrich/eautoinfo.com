@@ -120,7 +120,6 @@ class App extends Component {
 
 		return (
 				<div className="App">
-					{this.state.carsToCompare.length}
 					<Bar onClick={ () => this.handleMainClick()}/>
 					<Filter
 						onPriceChange={ this.handlePriceChange }

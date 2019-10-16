@@ -42,7 +42,7 @@
 }
 
 .filter-inputs {
-	padding: 5px;
+	padding-top: 5px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -51,4 +51,18 @@
 .textInput {
 	margin-top: 5px;
 	width: 300px;
+}
+
+.filter-chip { 
+	margin: 3px !important;
+}
+
+@media only screen and (max-width: 600px) {
+	.textField {
+		width: 150px;
+	}
+
+	.textInput {
+		width: 150px;
+	}
 }

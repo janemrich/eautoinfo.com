@@ -4,7 +4,7 @@
 	justify-content: center;
 	flex: 1;
 	//align-items: flex-start;
-	//width: 75%;
+	width: 100%;
 	margin:auto;
 }
   
@@ -19,7 +19,7 @@
 	//background-size: cover;
 	//overflow-x: hidden;
 	//overflow-y: hidden;
-	margin: 20px;
+	margin: 10px;
 }
   
 .car-media {
@@ -62,9 +62,24 @@
 	margin-top: 0px;
 }
 
+.metric-container {
+	display: flex;
+	justify-content: center;
+}
+
+.car-metric {
+	margin: auto;
+}
+
 @media only screen and (max-width: 600px) {
 
 	.car-card {
 		margin: 7px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.Car-list {
+		width: 1200px;
 	}
 }

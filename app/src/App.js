@@ -23,7 +23,6 @@ class App extends Component {
 	state = {
 		cars: [],
 		carsToCompare: [],
-		carsToCompareThumbs: [],
 		toDetail: null,
 		price: "",
 		range: "",

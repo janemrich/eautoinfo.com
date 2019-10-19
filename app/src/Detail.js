@@ -4,6 +4,12 @@ import {Bar} from './Bar.js'
 import './Detail.css';
 import { Redirect } from 'react-router';
 
+import BatteryStdIcon from '@material-ui/icons/BatteryStd';
+import EcoIcon from '@material-ui/icons/Eco';
+import EvStationIcon from '@material-ui/icons/EvStation';
+import SpeedIcon from '@material-ui/icons/Speed';
+import TimerIcon from '@material-ui/icons/Timer';
+
 class Detail extends React.Component {
   state = {
 	cars: [],
@@ -55,7 +61,7 @@ function CarCardb(props) {
 	};
 
 	return (
-		<>
+		<div>
 		<Paper className="Detail-paper">
 			<h1 className="Detail-name">
 				{ props.car.manufacturer
@@ -72,28 +78,42 @@ function CarCardb(props) {
 			</h2>
 		</Paper>
 		<Paper className="Detail-paper">
-			<div className="info-box">
-			<div class="flex-container">
-				<div className="row">
-					<div className="row-title">
-						{ 'Reichweite: ' }
-					</div>
-					<div className="row-cell">
-						{ props.car.range_wlpt + ' km' }
-					</div>
-				</div>
-				<div className="row">
-					<div className="row-title">
-						{ 'Effizienz: ' }
-					</div>
-					<div className="row-cell">
-						{ props.car.efficiency + ' kWh/100km' }
-					</div>
-				</div>
+			<div className="Detail-metrics">
+			<table className="Detail-table">
+			<tr>
+				<td>
+					Reichweite
+				</td>
+					{ props.car.range_wlpt + ' km' }
+			</tr>
+			<tr>
+				<td>
+					Höchstgeschwindigkeit
+				</td>
+					{ props.car.top_speed + ' km/h'}
+			</tr>
+			<tr>
+				<td>
+					0 - 100 km/h
+				</td>
+					{ props.car.acceleration + ' s'}
+			</tr>
+			<tr>
+				<td>
+					Schnell-Laden
+				</td>
+					{ props.car.fast_charge + ' km/h'}
+			</tr>
+			<tr>
+				<td>
+					Verbrauch
+				</td>
+					{ props.car.efficiency + ' kWh/100km' }
+			</tr>
+			</table>
 			</div>
-			</div>
-		</Paper>
-		</>
+		</ Paper>
+		</div>
 	);
 }
 

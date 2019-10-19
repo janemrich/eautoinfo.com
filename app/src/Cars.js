@@ -6,6 +6,7 @@ import BatteryStdIcon from '@material-ui/icons/BatteryStd';
 import EcoIcon from '@material-ui/icons/Eco';
 import EvStationIcon from '@material-ui/icons/EvStation';
 import SpeedIcon from '@material-ui/icons/Speed';
+import TimerIcon from '@material-ui/icons/Timer';
 
 function CarCard(props) {
 	console.log(props);
@@ -45,10 +46,18 @@ function CarCard(props) {
 						</div>
 						<div className="car-metric">
 							<div className="metric-title">
-							<EcoIcon />
+								<SpeedIcon />
 							</div>
 							<div className="metric-cell">
-								{ props.car.efficiency + ' kWh/100km' }
+								{ props.car.top_speed + ' km/h'}
+							</div>
+						</div>
+						<div className="car-metric">
+							<div className="metric-title">
+								<TimerIcon /> 0 - 100
+							</div>
+							<div className="metric-cell">
+								{ props.car.acceleration + ' s'}
 							</div>
 						</div>
 					</div>
@@ -63,10 +72,10 @@ function CarCard(props) {
 						</div>
 						<div className="car-metric">
 							<div className="metric-title">
-								<SpeedIcon />
+							<EcoIcon />
 							</div>
 							<div className="metric-cell">
-								{ props.car.top_speed + ' km/h'}
+								{ props.car.efficiency + ' kWh/100km' }
 							</div>
 						</div>
 					</div>

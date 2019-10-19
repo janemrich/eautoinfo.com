@@ -26,7 +26,7 @@ class App extends Component {
 		toDetail: null,
 		price: "",
 		range: "",
-		sortby: "price"
+		sortby: ""
 	}
 
 	handleCardClick(id) {
@@ -98,17 +98,14 @@ class App extends Component {
 				return filtered_cars.sort(
 					(a, b) => (a.price_de > b.price_de) ? 1 : -1
 				)
-			break;
 			case 'range':
 				return filtered_cars.sort(
 					(a, b) => (a.range_wlpt < b.range_wlpt) ? 1 : -1
 				)
-			break;
 			case 'efficiency':
 				return filtered_cars.sort(
 					(a, b) => (a.efficiency > b.efficiency) ? 1 : -1
 				)
-			break;
 			case 'fast_charge':
 				return filtered_cars.sort(
 					(a, b) => (a.fast_charge < b.fast_charge) ? 1 : -1
@@ -117,6 +114,12 @@ class App extends Component {
 				return filtered_cars.sort(
 					(a, b) => (a.top_speed < b.top_speed) ? 1 : -1
 				)
+			case 'acceleration':
+				return filtered_cars.sort(
+					(a, b) => (a.acceleration > b.acceleration) ? 1 : -1
+				)
+			case '':
+				return filtered_cars;
 		}
 	}
 
@@ -227,6 +230,13 @@ function Filter(props) {
 				label="Höchstgeschwindigkeit"
 				clickable
 				onClick={ () => props.onSortChange('top_speed')}
+			/>
+			<Chip
+				className="filter-chip"
+				{...((props.sortby == 'acceleration') ? {color: 'primary'} : {})}
+				label="Beschleunigung"
+				clickable
+				onClick={ () => props.onSortChange('acceleration')}
 			/>
 		</Paper>
 	)

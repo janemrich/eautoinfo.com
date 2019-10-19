@@ -5,12 +5,17 @@
     width: 95%;
 }
 
-.Detail-name {
-    padding: 10px;
+.Detail-price {
+    margin-top: 5px;
+}
+.Detail-metrics {
+    display: table;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.Detail-price {
-    padding: 10px;
+.Detail-table {
+    width: 300px;
 }
 
 img {

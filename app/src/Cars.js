@@ -4,6 +4,8 @@ import {Card, Box, CardActions, CardActionArea, CardContent, Typography, CardMed
 import AddIcon from '@material-ui/icons/Add';
 import BatteryStdIcon from '@material-ui/icons/BatteryStd';
 import EcoIcon from '@material-ui/icons/Eco';
+import EvStationIcon from '@material-ui/icons/EvStation';
+import SpeedIcon from '@material-ui/icons/Speed';
 
 function CarCard(props) {
 	console.log(props);
@@ -32,11 +34,7 @@ function CarCard(props) {
 								maximumFractionDigits: '2',}) }
           			</Typography>
 				<div>
-					{/*<Typography component="p">
-          				{ 'Reichweite: ' +  props.car.range_wlpt + ' km' } <br />
-						{ 'Verbrauch: ' +  props.car.efficiency + ' kWh/100km' }
-					</Typography>
-					*/}<div class="metric-container">
+					<div class="metric-container">
 						<div className="car-metric">
 							<div className="metric-title">
 								<BatteryStdIcon />
@@ -51,6 +49,24 @@ function CarCard(props) {
 							</div>
 							<div className="metric-cell">
 								{ props.car.efficiency + ' kWh/100km' }
+							</div>
+						</div>
+					</div>
+					<div className="metric-container">
+						<div className="car-metric">
+							<div className="metric-title">
+								<EvStationIcon />
+							</div>
+							<div className="metric-cell">
+								{ props.car.fast_charge + ' km/h'}
+							</div>
+						</div>
+						<div className="car-metric">
+							<div className="metric-title">
+								<SpeedIcon />
+							</div>
+							<div className="metric-cell">
+								{ props.car.top_speed + ' km/h'}
 							</div>
 						</div>
 					</div>

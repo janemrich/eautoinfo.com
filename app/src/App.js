@@ -109,6 +109,14 @@ class App extends Component {
 					(a, b) => (a.efficiency > b.efficiency) ? 1 : -1
 				)
 			break;
+			case 'fast_charge':
+				return filtered_cars.sort(
+					(a, b) => (a.fast_charge < b.fast_charge) ? 1 : -1
+				)
+			case 'top_speed':
+				return filtered_cars.sort(
+					(a, b) => (a.top_speed < b.top_speed) ? 1 : -1
+				)
 		}
 	}
 
@@ -205,6 +213,20 @@ function Filter(props) {
 				label="Effizienz"
 				clickable
 				onClick={ () => props.onSortChange('efficiency')}
+			/>
+			<Chip
+				className="filter-chip"
+				{...((props.sortby == 'fast_charge') ? {color: 'primary'} : {})}
+				label="Schnellladen"
+				clickable
+				onClick={ () => props.onSortChange('fast_charge')}
+			/>
+			<Chip
+				className="filter-chip"
+				{...((props.sortby == 'top_speed') ? {color: 'primary'} : {})}
+				label="Höchstgeschwindigkeit"
+				clickable
+				onClick={ () => props.onSortChange('top_speed')}
 			/>
 		</Paper>
 	)

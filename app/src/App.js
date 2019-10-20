@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
+import { Sort } from './Sort.js';
 import { Redirect } from "react-router";
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { Paper, Box, Icon, Avatar } from '@material-ui/core';
 
-
-import IconButton from '@material-ui/core/IconButton';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
@@ -131,7 +127,7 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					<Filter
+					<Sort
 						onPriceChange={ this.handlePriceChange }
 						price={this.state.price}
 						onRangeChange={ this.handleRangeChange }
@@ -164,84 +160,3 @@ class App extends Component {
 }
 
 export default App;
-function Filter(props) {
-	return (
-		<Paper className="filters">
-			<Box className="filter-inputs">
-			<div className="textField">
-			<TextField
-				className="textInput"
-				id="outlined-adornment-amount"
-				variant="outlined"
-				label="Preis ab"
-				value={props.price}
-				onChange={ props.onPriceChange }
-				InputProps={{
-				startAdornment: <InputAdornment position="start">€</InputAdornment>,
-				}}
-			/>
-			</div>
-			<div className="textField">
-			<TextField
-				className="textInput"
-				id="outlined-adornment-amount"
-				variant="outlined"
-				label="Reichweite ab"
-				value={props.range}
-				onChange={ props.onRangeChange }
-				InputProps={{
-				startAdornment: <InputAdornment position="start">km</InputAdornment>,
-				}}
-			/>
-			</div>
-			</Box>
-			<FilterListIcon /> 
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'price') ? {color: 'primary'} : {})}
-				label="Preis"
-				clickable
-				onClick={ () => props.onSortChange('price')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'range') ? {color: 'primary'} : {})}
-				label="Reichweite"
-				clickable
-				onClick={ () => props.onSortChange('range')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'efficiency') ? {color: 'primary'} : {})}
-				label="Effizienz"
-				clickable
-				onClick={ () => props.onSortChange('efficiency')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'fast_charge') ? {color: 'primary'} : {})}
-				label="Schnellladen"
-				clickable
-				onClick={ () => props.onSortChange('fast_charge')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'top_speed') ? {color: 'primary'} : {})}
-				label="Höchstgeschwindigkeit"
-				clickable
-				onClick={ () => props.onSortChange('top_speed')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'acceleration') ? {color: 'primary'} : {})}
-				label="Beschleunigung"
-				clickable
-				onClick={ () => props.onSortChange('acceleration')}
-			/>
-		</Paper>
-	)
-}
-
-function Sort(props) {
-
-}

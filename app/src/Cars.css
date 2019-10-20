@@ -5,14 +5,15 @@
 	flex: 1;
 	//align-items: flex-start;
 	width: 100%;
+	max-width: 1000px;
 	margin:auto;
 }
   
 .car-card {
 	display: block;
-	flex: 25%;
-	min-width:18rem;
-	max-width:22rem;
+	flex: 100%;
+	//min-width:18rem;
+	//max-width:22rem;
 	//height: 150px;
 	//position: relative;
 	//box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
@@ -27,7 +28,7 @@
 	//flex: 25%;
 	width: 100%;
 	//min-width:250px;
-	height: 170px;
+	height: 190px;
 	position: relative;
 	//border-radius: 5px;
 	//box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
@@ -39,6 +40,7 @@
   
 .add-button {
 	color: default;
+	width: 130px;
 }
 
 .card-content {
@@ -75,6 +77,10 @@
 	width: 50%;
 }
 
+.car-metric-group {
+	padding-top: 0px;
+}
+
 @media only screen and (max-width: 600px) {
 
 	.car-card {
@@ -85,5 +91,37 @@
 @media only screen and (min-width: 1300px) {
 	.Car-list {
 		width: 1300px;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+
+	.card-card {
+		max-width: 800px;
+	}
+	.car-action-area {
+		display: flex !important;
+		flex: 1;
+	}
+
+	.card-top {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.Car-name {
+		width: 80%;
+	}
+
+	.car-media {
+		width: 40%;
+	}
+
+	.card-content {
+		width: 60%;
+	}
+
+	.car-metric-group {
+		padding-top: 20px;
 	}
 }

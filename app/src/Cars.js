@@ -8,6 +8,7 @@ import EvStationIcon from '@material-ui/icons/EvStation';
 import SpeedIcon from '@material-ui/icons/Speed';
 import TimerIcon from '@material-ui/icons/Timer';
 import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
+import { styled } from '@material-ui/styles';
 
 function CarCard(props) {
 	console.log(props);
@@ -15,6 +16,10 @@ function CarCard(props) {
 	const style = {
 		backgroundImage: 'url(https://api.eautoinfo.com' + props.car.thumbnail.url + ')',
 	};
+
+	const greenTimerIcon = styled(TimerIcon)({
+		color: 'green',
+	});
 	return (
 		<Card className="car-card">
 			<CardActionArea  onClick={ () => props.onClick(props.car.id) }>
@@ -23,7 +28,7 @@ function CarCard(props) {
 				>
 				</CardMedia>
 				<CardContent className="card-content">
-					<Typography variant="h6" component="h2">
+					<Typography className="Car-name" variant="h6" component="h2">
 						{ props.car.manufacturer
 							+ ' ' + props.car.model
 							+ ' ' + props.car.edition
@@ -52,7 +57,7 @@ function CarCard(props) {
 						</div>
 						<div className="car-metric">
 							<div className="metric-title">
-								<TimerIcon /> 0 - 100
+								<TimerIcon className={greenTimerIcon} /> 0 - 100
 							</div>
 							<div className="metric-cell">
 								{ props.car.acceleration + ' s'}
@@ -78,7 +83,7 @@ function CarCard(props) {
 						</div>
 						<div className="car-metric">
 							<div className="metric-title">
-							<EcoIcon />
+							<EcoIcon/>
 							</div>
 							<div className="metric-cell">
 								{ props.car.efficiency + ' kWh/100km' }

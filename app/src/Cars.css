@@ -45,6 +45,13 @@
 	padding: 2px !important;
 }
 
+.Car-name {
+	color: rgba(0,0,0,.87);
+	font-weight: 400 !important;
+	font-size: 20px !important;
+	padding: 3px;
+}
+
 .Car-cardOverlay {
 	display: block;
 	position: absolute;
@@ -55,16 +62,13 @@
 	left: 0px;
 }
   
-.Car-card h3 {
-	position: absolute;
-	top: 50%;
-	left: 5%;
-	margin-top: 0px;
-}
-
 .metric-container {
 	display: flex;
 	justify-content: center;
+	padding: 5px;
+	font-weight: 400;
+	color: rgba(0,0,0,.6);
+	font-size: 14px !important;
 }
 
 .car-metric {
@@ -78,8 +82,8 @@
 	}
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1300px) {
 	.Car-list {
-		width: 1200px;
+		width: 1300px;
 	}
 }

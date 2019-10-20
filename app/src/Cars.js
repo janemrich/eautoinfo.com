@@ -8,7 +8,6 @@ import EvStationIcon from '@material-ui/icons/EvStation';
 import SpeedIcon from '@material-ui/icons/Speed';
 import TimerIcon from '@material-ui/icons/Timer';
 import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
-import { styled } from '@material-ui/styles';
 
 function CarCard(props) {
 	console.log(props);
@@ -17,9 +16,6 @@ function CarCard(props) {
 		backgroundImage: 'url(https://api.eautoinfo.com' + props.car.thumbnail.url + ')',
 	};
 
-	const greenTimerIcon = styled(TimerIcon)({
-		color: 'green',
-	});
 	return (
 		<Card className="car-card">
 			<div className="car-action-area">
@@ -74,7 +70,7 @@ function CarCard(props) {
 							</div>
 							<div className="car-metric">
 								<div className="metric-title">
-									<TimerIcon className={greenTimerIcon} /> 0 - 100
+									<TimerIcon /> 0 - 100
 								</div>
 								<div className="metric-cell">
 									{ props.car.acceleration + ' s'}

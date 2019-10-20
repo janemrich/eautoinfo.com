@@ -119,9 +119,22 @@ class App extends Component {
 		}
 	}
 
+	handleCompareClick() {
+		this.setState({
+			toComparison: true,
+		})
+	}
+
 	render() {
 		if (this.state.toDetail) {
 			return <Redirect to={'/car/' + this.state.toDetail} />
+		}
+		if (this.state.toComparison) {
+			return <Redirect to={{
+								pathname: '/compare/',
+								state: {cars: this.state.carsToCompare}
+							}}
+					/>
 		}
 
 		return (
@@ -141,22 +154,40 @@ class App extends Component {
 						onAddClick={(id) => this.handleAddClick(id) }
 					/>
 					{this.state.carsToCompare.length > 0 &&
-						<Paper className="cars-to-compare">
-							<Button variant="outlined"> vergleiche</Button>
-							{ this.state.carsToCompare.map(
-								car => <Chip
-											className="car-chip"
-											avatar={<Avatar src={'https://api.eautoinfo.com' + car.thumbnail.url} />}
-											onDelete={() => this.handleDelete(car.id)}
-											label={car.model}
-										/>
-							)}
-						</Paper>
+						<CompareBox
+							onClick={ () => this.handleCompareClick()}
+							onDelete={ (id) => this.handleDelete(id)}
+							cars={ this.state.carsToCompare }
+						>
+						</CompareBox>
 					}
 				</div>
 		);
 	}
 
 }
+
+function CompareBox(props) {
+	return (
+		<Paper className="cars-to-compare">
+			<Button
+				variant="outlined"
+				onClick={ () => props.onClick() }
+			>
+				vergleiche
+			</Button>
+			{ props.cars.map(
+				car => <Chip
+							className="car-chip"
+							avatar={<Avatar src={'https://api.eautoinfo.com' + car.thumbnail.url} />}
+							onDelete={() => props.onDelete(car.id)}
+							label={car.model}
+						/>
+			)}
+		</Paper>
+
+	)
+}
+
 
 export default App;

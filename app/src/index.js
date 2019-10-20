@@ -5,6 +5,7 @@ import './index.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import App from './App';
 import Detail from './Detail';
+import Compare from './Compare';
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -12,6 +13,7 @@ const routing = (
         <div>
             <Route exact path="/" component={App} />
             <Route path="/car/:id" component={Detail} />
+            <Route path="/compare" component={Compare} />
         </div>
     </Router>
 )

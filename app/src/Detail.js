@@ -4,12 +4,6 @@ import {Bar} from './Bar.js'
 import './Detail.css';
 import { Redirect } from 'react-router';
 
-import BatteryStdIcon from '@material-ui/icons/BatteryStd';
-import EcoIcon from '@material-ui/icons/Eco';
-import EvStationIcon from '@material-ui/icons/EvStation';
-import SpeedIcon from '@material-ui/icons/Speed';
-import TimerIcon from '@material-ui/icons/Timer';
-
 class Detail extends React.Component {
   state = {
 	cars: [],
@@ -55,10 +49,6 @@ function CarsListb(props) {
 
 function CarCardb(props) {
 	console.log(props);
-
-	const style = {
-		backgroundImage: 'url(https://api.eautoinfo.com' + props.car.thumbnail.url + ')',
-	};
 
 	return (
 		<div>

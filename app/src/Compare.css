@@ -1,0 +1,40 @@
+.CompareList {
+}
+
+.Compare-image-container {
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.Compare-image {
+    height: 100%;
+}
+
+.Compare-name {
+    font-size: 16px;
+    font-weight: 300;
+    height: 60px;
+    padding-top: 10px;
+}
+
+.Compare-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Compare-metric-group {
+    width: 200px;
+}
+
+.Compare-data {
+    height: 60px;
+}
+
+.Compare-metric {
+    height: 60px;
+}
+
+.Compare-spacer {
+    height: 130px;
+}

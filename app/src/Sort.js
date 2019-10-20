@@ -11,32 +11,32 @@ export function Sort(props) {
 	return (
 		<Paper className="filters">
 			<Box className="filter-inputs">
-			<div className="textField">
-			<TextField
-				className="textInput"
-				id="outlined-adornment-amount"
-				variant="outlined"
-				label="Preis ab"
-				value={props.price}
-				onChange={ props.onPriceChange }
-				InputProps={{
-				startAdornment: <InputAdornment position="start">€</InputAdornment>,
-				}}
-			/>
-			</div>
-			<div className="textField">
-			<TextField
-				className="textInput"
-				id="outlined-adornment-amount"
-				variant="outlined"
-				label="Reichweite ab"
-				value={props.range}
-				onChange={ props.onRangeChange }
-				InputProps={{
-				startAdornment: <InputAdornment position="start">km</InputAdornment>,
-				}}
-			/>
-			</div>
+                <div className="textField">
+                    <TextField
+                        className="textInput"
+                        id="outlined-adornment-amount"
+                        variant="outlined"
+                        label="Preis ab"
+                        value={props.price}
+                        onChange={ props.onPriceChange }
+                        InputProps={{
+                        startAdornment: <InputAdornment position="start">€</InputAdornment>,
+                        }}
+                    />
+                </div>
+                <div className="textField">
+                    <TextField
+                        className="textInput"
+                        id="outlined-adornment-amount"
+                        variant="outlined"
+                        label="Reichweite ab"
+                        value={props.range}
+                        onChange={ props.onRangeChange }
+                        InputProps={{
+                        startAdornment: <InputAdornment position="start">km</InputAdornment>,
+                        }}
+                    />
+                </div>
 			</Box>
 			<FilterListIcon /> 
 			<Chip

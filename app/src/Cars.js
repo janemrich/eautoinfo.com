@@ -7,6 +7,7 @@ import EcoIcon from '@material-ui/icons/Eco';
 import EvStationIcon from '@material-ui/icons/EvStation';
 import SpeedIcon from '@material-ui/icons/Speed';
 import TimerIcon from '@material-ui/icons/Timer';
+import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
 function CarCard(props) {
 	console.log(props);
@@ -28,28 +29,25 @@ function CarCard(props) {
 							+ ' ' + props.car.edition
 						}
           			</Typography>
-					<Typography color="h6" component="h2">
-            			{ (props.car.price_de).toLocaleString('de-DE', {
-								style: 'currency',
-								currency: 'EUR',
-								maximumFractionDigits: '2',}) }
-          			</Typography>
 				<div>
 					<div class="metric-container">
+						<div className="car-metric">
+							<div className="metric-title">
+								<EuroSymbolIcon />
+							</div>
+							<div className="metric-cell">
+								{ (props.car.price_de).toLocaleString('de-DE', {
+										style: 'currency',
+										currency: 'EUR',
+										maximumFractionDigits: '2',}) }
+							</div>
+						</div>
 						<div className="car-metric">
 							<div className="metric-title">
 								<BatteryStdIcon />
 							</div>
 							<div className="metric-cell">
 								{ props.car.range_wlpt + ' km' }
-							</div>
-						</div>
-						<div className="car-metric">
-							<div className="metric-title">
-								<SpeedIcon />
-							</div>
-							<div className="metric-cell">
-								{ props.car.top_speed + ' km/h'}
 							</div>
 						</div>
 						<div className="car-metric">
@@ -62,6 +60,14 @@ function CarCard(props) {
 						</div>
 					</div>
 					<div className="metric-container">
+						<div className="car-metric">
+							<div className="metric-title">
+								<SpeedIcon />
+							</div>
+							<div className="metric-cell">
+								{ props.car.top_speed + ' km/h'}
+							</div>
+						</div>
 						<div className="car-metric">
 							<div className="metric-title">
 								<EvStationIcon />

@@ -1,0 +1,49 @@
+.filters {
+	margin-top: 10px;
+	padding: auto;
+}
+.textField {
+	margin: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+	padding: 5px;
+	width: 300px;
+}
+
+.filter-inputs {
+	padding-top: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.brand-Button {
+    margin: 10px !important;
+	width: 300px;
+}
+
+.textInput {
+	margin-top: 5px;
+	width: 300px;
+}
+
+.filter-chip { 
+	margin: 3px !important;
+}
+
+.brand-filter {
+	padding-top: 25px;
+	min-height: 100px;
+}
+
+.brand-button-done { 
+	margin-bottom: 10px !important;
+}
+
+.Sort-brandButton { 
+	margin-right: 10px !important;
+}
+
+.filter-sort {
+	width: 100%;
+}

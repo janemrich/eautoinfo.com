@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
-import { Sort } from './Sort.js';
+import Sort from './Sort.js';
 import { Redirect } from "react-router";
 
 import { Paper, Avatar } from '@material-ui/core';
@@ -22,7 +22,8 @@ class App extends Component {
 		toDetail: null,
 		price: "",
 		range: "",
-		sortby: ""
+		sortby: "",
+		filter_brands: [],
 	}
 
 	handleCardClick(id) {
@@ -89,6 +90,11 @@ class App extends Component {
 			).filter(
 				car => car.range_wlpt > this.state.range
 			);
+		for (let brand of this.state.filter_brands) {
+			filtered_cars = filtered_cars.filter(
+				car => car.manufacturer != brand
+			)
+		}
 		switch (this.state.sortby) {
 			case 'price':
 				return filtered_cars.sort(
@@ -119,6 +125,39 @@ class App extends Component {
 		}
 	}
 
+	getBrands() {
+		let brands = new Set(
+			this.state.cars.map( car => car.manufacturer)
+		)
+		return brands
+	}
+
+	handleBrandChange( brand ) {
+		if (brand == 'alle') {
+			this.setState({
+				filter_brands: []
+			})
+			return;
+		}
+		if (brand == 'keine') {
+			this.setState({
+				filter_brands: Array.from(this.getBrands())
+			})
+			return;
+		}
+		let brands = this.state.filter_brands;
+		if (brands.includes(brand)) {
+			brands = brands.filter(
+				f_brand => f_brand != brand
+			)
+		} else {
+			brands.push(brand)
+		}
+		this.setState({
+			filter_brands: brands
+		});
+	}
+
 	handleCompareClick() {
 		this.setState({
 			toComparison: true,
@@ -147,6 +186,9 @@ class App extends Component {
 						range={this.state.range}
 						sortby={this.state.sortby}
 						onSortChange={(type) => this.handleSortChange(type)}
+						brands={ this.getBrands() }
+						filter_brands={ this.state.filter_brands }
+						onBrandChange={(brand) => this.handleBrandChange(brand)}
 					/>
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }

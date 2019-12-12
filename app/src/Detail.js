@@ -1,5 +1,6 @@
-import React from 'react' 
-import { Box, Paper} from '@material-ui/core';
+import React, { Component } from 'react';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import {Bar} from './Bar.js'
 import './Detail.css';
 import { Redirect } from 'react-router';

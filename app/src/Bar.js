@@ -9,17 +9,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link'
 import { mergeClasses } from '@material-ui/styles';
 
+import './Bar.css';
 
 	const useStyles = makeStyles(theme => ({
 	  root: {
-	    flexGrow: 1,
+      flexGrow: 1,
 	  },
 	  menuButton: {
-	    marginRight: theme.spacing(2),
-	  },
-	  title: {
-      flexGrow: 1,
-      cursor: 'pointer',
+      marginRight: theme.spacing(2),
 	  },
   }));
   
@@ -29,16 +26,23 @@ export function Bar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className='Bar'>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography onClick={ () => props.onClick()} variant="h6" className={classes.title}>
+          <Typography
+            className={classes.title}
+            className="Bar-title"
+            onClick={ () => props.onClick()}
+            variant="h6"
+          >
             e auto info
           </Typography>
-          <Link href={"http://blog.eautoinfo.com"} className={classes.link}>
-            <Button variant='contained' color='default'>
+          <Link href={"http://blog.eautoinfo.com"}
+          >
+            <Button variant='outlined'
+            >
             Blog
             </Button>
           </Link>

@@ -1,0 +1,14 @@
+.Bar {
+    background-color: #ffffff !important;
+    color: #ff4f00
+}
+
+.Bar-title {
+    flex-grow: 1;
+    cursor: pointer;
+    color: #ff4f00;
+}
+
+.Bar-link {
+    color: #ff4f00;
+}

@@ -1,43 +1,97 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 
-import { Paper, Box} from '@material-ui/core';
+import { Paper, Box, Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 
-export function Sort(props) {
+import "./Sort.css";
+
+class Sort extends Component {
+
+	state = {
+		showBrandSelection: false,
+	}
+
+	handleClose() {
+		this.setState({
+			showBrandSelection: false,
+		})
+	}
+
+	handleBrandClick() {
+		this.setState({
+			showBrandSelection: true,
+		})
+	}	
+
+	render() {
+		return (
+			<Paper className="filters">
+				<Box className="filter-inputs">
+					{!this.state.showBrandSelection &&
+					<>
+						<div className="textField">
+							<TextField
+								className="textInput"
+								id="outlined-adornment-amount"
+								variant="outlined"
+								label="Preis ab"
+								value={this.props.price}
+								onChange={ this.props.onPriceChange }
+								InputProps={{
+								startAdornment: <InputAdornment position="start">€</InputAdornment>,
+								}}
+							/>
+						</div>
+						<div className="textField">
+							<TextField
+								className="textInput"
+								id="outlined-adornment-amount"
+								variant="outlined"
+								label="Reichweite ab"
+								value={this.props.range}
+								onChange={ this.props.onRangeChange }
+								InputProps={{
+								startAdornment: <InputAdornment position="start">km</InputAdornment>,
+								}}
+							/>
+						</div>
+						<Button className="brand-Button"
+						variant="outlined"
+						onClick={ () => this.handleBrandClick() }
+						>
+						Marken
+						</Button>
+						<Filters
+							onPriceChange={ this.props.handlePriceChange }
+							price={this.props.price}
+							onRangeChange={ this.props.handleRangeChange }
+							range={this.props.range}
+							sortby={this.props.sortby}
+							onSortChange={(type) => this.props.onSortChange(type)}
+						/>
+					</>
+					}
+					{this.state.showBrandSelection &&
+						<BrandSelector 
+                            onClose={ () => this.handleClose() }
+							brands={this.props.brands}
+							filter_brands={this.props.filter_brands}
+							onBrandChange={ ( brand ) => this.props.onBrandChange( brand )}
+						/>
+					}
+				</Box>
+			</Paper>
+		);
+	}
+}
+
+function Filters(props) {
 	return (
-		<Paper className="filters">
-			<Box className="filter-inputs">
-                <div className="textField">
-                    <TextField
-                        className="textInput"
-                        id="outlined-adornment-amount"
-                        variant="outlined"
-                        label="Preis ab"
-                        value={props.price}
-                        onChange={ props.onPriceChange }
-                        InputProps={{
-                        startAdornment: <InputAdornment position="start">€</InputAdornment>,
-                        }}
-                    />
-                </div>
-                <div className="textField">
-                    <TextField
-                        className="textInput"
-                        id="outlined-adornment-amount"
-                        variant="outlined"
-                        label="Reichweite ab"
-                        value={props.range}
-                        onChange={ props.onRangeChange }
-                        InputProps={{
-                        startAdornment: <InputAdornment position="start">km</InputAdornment>,
-                        }}
-                    />
-                </div>
-			</Box>
+		<div className="filter-sort">
 			<FilterListIcon /> 
 			<Chip
 				className="filter-chip"
@@ -81,6 +135,49 @@ export function Sort(props) {
 				clickable
 				onClick={ () => props.onSortChange('acceleration')}
 			/>
-		</Paper>
+		</div>
+	);
+}
+
+function BrandSelector(props) {
+	return (
+		<div
+			className='brand-filter'
+		>
+			<Button
+				className="Sort-brandButton"
+				onClick={() => props.onBrandChange('alle')}
+				variant='outlined'
+			>
+				Alle
+			</Button>
+			<Button
+				className="Sort-brandButton"
+				onClick={() => props.onBrandChange('keine')}
+				variant='outlined'
+			>
+				Keine
+			</Button>
+			{Array.from(props.brands).map(
+                brand => <Chip
+							className="filter-chip"
+							{... ((props.filter_brands.includes(brand)) ? {} : {color: 'primary'} )}
+							label={brand}
+							clickable
+							onClick={ () => props.onBrandChange(brand) }
+                        />
+            )
+            }
+			<p />
+			<Button
+				className='brand-button-done'
+				onClick={ () => props.onClose() }
+				variant='contained'
+			>
+				Fertig
+			</Button>
+		</div>
 	)
 }
+
+export default Sort;

@@ -9,6 +9,7 @@ class Detail extends React.Component {
   state = {
 	cars: [],
 	showDetail: true,
+	redirectToBlog: false
   }
 
   componentDidMount() {
@@ -23,21 +24,35 @@ class Detail extends React.Component {
   handleMainClick() {
 	  this.setState({ showDetail: false });
   }
-
+	handleArticleClick(){
+		this.setState({ showDetail: true });
+	}
   render() {
 	if (!this.state.showDetail) {
 		return <Redirect to={'/'}></Redirect>
+	}
+	else if(this.state.redirectToBlog){
+		return <Redirect to={'http://blog.eautoinfo.com:8000/?p=9'}></Redirect>
 	}
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}
 					/>
 					<CarsListb cars={this.state.cars}/>
+					<Articles/>
 				</div>
 		);
 	}
 }
-
+	
+function Articles(props) {
+	return (
+		<div className="Detail-article">
+			<a className="Article-title" onClick={ () => this.handleArticleClick()} href="http://blog.eautoinfo.com:8000/?p=9">Local production for Tesla in China is being underestimated</a>
+			<img className="Article-img" src={ 'http://blog.eautoinfo.com:8000/wp-content/uploads/2019/10/tesla-gigafactory-3-late-sept-19-1-1024x513.jpg'}></img>
+		</div>
+	)
+}
 function CarsListb(props) {
 	const carsCards = props.cars.map(car => <CarCardb car={car} />);
 
@@ -104,6 +119,8 @@ function CarCardb(props) {
 			</table>
 			</div>
 		</ Paper>
+		
+		
 		</div>
 	);
 }

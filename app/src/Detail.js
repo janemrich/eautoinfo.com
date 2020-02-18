@@ -47,10 +47,13 @@ class Detail extends React.Component {
 	
 function Articles(props) {
 	return (
-		<div className="Detail-article">
+		<paper className="Detail-article">
+			{/* <div className="Detail-article"> */}
 			<a className="Article-title" onClick={ () => this.handleArticleClick()} href="http://blog.eautoinfo.com:8000/?p=9">Local production for Tesla in China is being underestimated</a>
 			<img className="Article-img" src={ 'http://blog.eautoinfo.com:8000/wp-content/uploads/2019/10/tesla-gigafactory-3-late-sept-19-1-1024x513.jpg'}></img>
-		</div>
+		{/* </div> */}
+		</paper>
+		
 	)
 }
 function CarsListb(props) {

@@ -9,6 +9,7 @@ import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
+const sortbyContext = React.createContext("");
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -179,17 +180,20 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					<Sort
-						onPriceChange={ this.handlePriceChange }
-						price={this.state.price}
-						onRangeChange={ this.handleRangeChange }
-						range={this.state.range}
-						sortby={this.state.sortby}
-						onSortChange={(type) => this.handleSortChange(type)}
-						brands={ this.getBrands() }
-						filter_brands={ this.state.filter_brands }
-						onBrandChange={(brand) => this.handleBrandChange(brand)}
-					/>
+						<sortbyContext.Provider value = {this.state.sortby}>
+							<Sort
+								onPriceChange={ this.handlePriceChange }
+								price={this.state.price}
+								// onRangeChange={ this.handleRangeChange }
+								range={this.state.range}
+								sortby={this.state.sortby}
+								onSortChange={(type) => this.handleSortChange(type)}
+								brands={ this.getBrands() }
+								filter_brands={ this.state.filter_brands }
+								onBrandChange={(brand) => this.handleBrandChange(brand)}
+							/>
+						</sortbyContext.Provider>
+					
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}

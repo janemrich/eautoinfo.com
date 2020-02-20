@@ -180,13 +180,12 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					<sortbyContext.Provider value = {this.state.sortby}>
+					<sortbyContext.Provider sortby = {this.state.sortby}>
 						<Sort
 							onPriceChange={ this.handlePriceChange }
 							price={this.state.price}
-							// onRangeChange={ this.handleRangeChange }
+							onRangeChange={ this.handleRangeChange }
 							range={this.state.range}
-							sortby={this.state.sortby}
 							onSortChange={(type) => this.handleSortChange(type)}
 							brands={ this.getBrands() }
 							filter_brands={ this.state.filter_brands }

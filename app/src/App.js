@@ -4,12 +4,16 @@ import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
 import Sort from './Sort.js';
 import { Redirect } from "react-router";
-
+import PropTypes from 'prop-types'; 
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
 class App extends Component {
+	static childContextTypes = {
+    sortby: PropTypes.string
+	}
+
 	constructor(props) {
 		super(props);
 		this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -26,6 +30,10 @@ class App extends Component {
 		filter_brands: [],
 	}
 
+	getChildContext () {
+    return { sortby: this.state.sortby }
+	}
+	
 	handleCardClick(id) {
 		this.setState({
 			toDetail: id,
@@ -179,6 +187,7 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
+<<<<<<< Updated upstream
 					<Sort
 						onPriceChange={ this.handlePriceChange }
 						price={this.state.price}
@@ -190,6 +199,21 @@ class App extends Component {
 						filter_brands={ this.state.filter_brands }
 						onBrandChange={(brand) => this.handleBrandChange(brand)}
 					/>
+=======
+					{/* <sortbyContext.Provider sortby = {this.state.sortby}> */}
+						<Sort
+							onPriceChange={ this.handlePriceChange }
+							price={this.state.price}
+							onRangeChange={ this.handleRangeChange }
+							range={this.state.range}
+							onSortChange={(type) => this.handleSortChange(type)}
+							brands={ this.getBrands() }
+							filter_brands={ this.state.filter_brands }
+							onBrandChange={(brand) => this.handleBrandChange(brand)}
+						/>
+					{/* </sortbyContext.Provider> */}
+					
+>>>>>>> Stashed changes
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}

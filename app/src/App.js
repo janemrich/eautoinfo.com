@@ -187,19 +187,6 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-<<<<<<< Updated upstream
-					<Sort
-						onPriceChange={ this.handlePriceChange }
-						price={this.state.price}
-						onRangeChange={ this.handleRangeChange }
-						range={this.state.range}
-						sortby={this.state.sortby}
-						onSortChange={(type) => this.handleSortChange(type)}
-						brands={ this.getBrands() }
-						filter_brands={ this.state.filter_brands }
-						onBrandChange={(brand) => this.handleBrandChange(brand)}
-					/>
-=======
 					{/* <sortbyContext.Provider sortby = {this.state.sortby}> */}
 						<Sort
 							onPriceChange={ this.handlePriceChange }
@@ -213,7 +200,6 @@ class App extends Component {
 						/>
 					{/* </sortbyContext.Provider> */}
 					
->>>>>>> Stashed changes
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}

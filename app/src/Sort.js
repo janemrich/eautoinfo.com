@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< Updated upstream
-
-
-=======
 import PropTypes from 'prop-types'; 
->>>>>>> Stashed changes
 import { Paper, Box, Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -72,15 +67,7 @@ class Sort extends Component {
 						Marken
 						</Button>
 						<Filters
-<<<<<<< Updated upstream
-							onPriceChange={ this.props.handlePriceChange }
-							price={this.props.price}
-							onRangeChange={ this.props.handleRangeChange }
-							range={this.props.range}
-							sortby={this.props.sortby}
-=======
 							sortby = {this.context.sortby}
->>>>>>> Stashed changes
 							onSortChange={(type) => this.props.onSortChange(type)}
 						/>
 					</>
@@ -103,50 +90,6 @@ function Filters(props) {
 	return (
 		<div className="filter-sort">
 			<FilterListIcon /> 
-<<<<<<< Updated upstream
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'price') ? {color: 'primary'} : {})}
-				label="Preis"
-				clickable
-				onClick={ () => props.onSortChange('price')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'range') ? {color: 'primary'} : {})}
-				label="Reichweite"
-				clickable
-				onClick={ () => props.onSortChange('range')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'efficiency') ? {color: 'primary'} : {})}
-				label="Effizienz"
-				clickable
-				onClick={ () => props.onSortChange('efficiency')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'fast_charge') ? {color: 'primary'} : {})}
-				label="Schnellladen"
-				clickable
-				onClick={ () => props.onSortChange('fast_charge')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'top_speed') ? {color: 'primary'} : {})}
-				label="Höchstgeschwindigkeit"
-				clickable
-				onClick={ () => props.onSortChange('top_speed')}
-			/>
-			<Chip
-				className="filter-chip"
-				{...((props.sortby == 'acceleration') ? {color: 'primary'} : {})}
-				label="Beschleunigung"
-				clickable
-				onClick={ () => props.onSortChange('acceleration')}
-			/>
-=======
 						<Chip
 							className="filter-chip"
 							{...((props.sortby == 'price') ? {color: 'primary'} : {})}
@@ -189,7 +132,6 @@ function Filters(props) {
 							clickable
 							onClick={ () => props.onSortChange('acceleration')}
 						/>
->>>>>>> Stashed changes
 		</div>
 	);
 }

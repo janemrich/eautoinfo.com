@@ -121,7 +121,7 @@ function CarCardb(props) {
 					+ ' ' + props.car.edition
 				}
 			</h1>
-			<img src={ 'https://api.eautoinfo.com' + props.car.thumbnail.url}></img>
+			<img className = "Detail-img" src={ 'https://api.eautoinfo.com' + props.car.thumbnail.url}></img>
 			<h2 className="Detail-price">
 				{ (props.car.price_de).toLocaleString('de-DE', {
 						style: 'currency',

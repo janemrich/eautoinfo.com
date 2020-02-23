@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types'; 
 import { Paper, Box, Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
-
 import "./Sort.css";
 
 const sortbyContext = React.createContext("");
 
 class Sort extends Component {
 
+	static contextTypes = {
+    sortby: PropTypes.string
+  }
 	state = {
 		showBrandSelection: false,
 	}
@@ -67,6 +69,7 @@ class Sort extends Component {
 						Marken
 						</Button>
 						<Filters
+							sortby = {this.context.sortby}
 							onSortChange={(type) => this.props.onSortChange(type)}
 						/>
 					</>
@@ -88,58 +91,49 @@ class Sort extends Component {
 function Filters(props) {
 	return (
 		<div className="filter-sort">
-			<FilterListIcon /> 
-			<sortbyContext.Consumer>
-				{
-					sortby => (
-						<div>
+			<FilterListIcon />  
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'price') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'price') ? {color: 'primary'} : {})}
 							label="Preis"
 							clickable
 							onClick={ () => props.onSortChange('price')}
 						/>
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'range') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'range') ? {color: 'primary'} : {})}
 							label="Reichweite"
 							clickable
 							onClick={ () => props.onSortChange('range')}
 						/>
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'efficiency') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'efficiency') ? {color: 'primary'} : {})}
 							label="Effizienz"
 							clickable
 							onClick={ () => props.onSortChange('efficiency')}
 						/>
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'fast_charge') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'fast_charge') ? {color: 'primary'} : {})}
 							label="Schnellladen"
 							clickable
 							onClick={ () => props.onSortChange('fast_charge')}
 						/>
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'top_speed') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'top_speed') ? {color: 'primary'} : {})}
 							label="Höchstgeschwindigkeit"
 							clickable
 							onClick={ () => props.onSortChange('top_speed')}
 						/>
 						<Chip
 							className="filter-chip"
-							{...((sortby == 'acceleration') ? {color: 'primary'} : {})}
+							{...((props.sortby == 'acceleration') ? {color: 'primary'} : {})}
 							label="Beschleunigung"
 							clickable
 							onClick={ () => props.onSortChange('acceleration')}
 						/>
-						</div>
-					)	
-					
-				}
-			</sortbyContext.Consumer>
 		</div>
 	)
 }

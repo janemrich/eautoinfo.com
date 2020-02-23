@@ -4,13 +4,17 @@ import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
 import Sort from './Sort.js';
 import { Redirect } from "react-router";
-
+import PropTypes from 'prop-types'; 
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
 const sortbyContext = React.createContext("");
 class App extends Component {
+	static childContextTypes = {
+    sortby: PropTypes.string
+	}
+
 	constructor(props) {
 		super(props);
 		this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -27,6 +31,10 @@ class App extends Component {
 		filter_brands: [],
 	}
 
+	getChildContext () {
+    return { sortby: this.state.sortby }
+	}
+	
 	handleCardClick(id) {
 		this.setState({
 			toDetail: id,
@@ -180,7 +188,6 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					<sortbyContext.Provider sortby = {this.state.sortby}>
 						<Sort
 							onPriceChange={ this.handlePriceChange }
 							price={this.state.price}
@@ -191,7 +198,6 @@ class App extends Component {
 							filter_brands={ this.state.filter_brands }
 							onBrandChange={(brand) => this.handleBrandChange(brand)}
 						/>
-					</sortbyContext.Provider>
 					
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }

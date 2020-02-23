@@ -5,6 +5,25 @@ import {Bar} from './Bar.js'
 import './Detail.css';
 import { Redirect } from 'react-router';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+  root: {
+		maxWidth: 400,
+		
+  },
+  media: {
+    height: 200,
+  },
+});
+
 class Detail extends React.Component {
   state = {
 	cars: [],
@@ -39,20 +58,44 @@ class Detail extends React.Component {
 					<Bar onClick={ () => this.handleMainClick()}
 					/>
 					<CarsListb cars={this.state.cars}/>
-					<Articles/>
+					<Articles/>				
 				</div>
 		);
 	}
 }
 	
 function Articles(props) {
+	const classes = useStyles();
 	return (
-		<paper className="Detail-article">
-			{/* <div className="Detail-article"> */}
-			<a className="Article-title" onClick={ () => this.handleArticleClick()} href="http://blog.eautoinfo.com:8000/?p=9">Local production for Tesla in China is being underestimated</a>
-			<img className="Article-img" src={ 'http://blog.eautoinfo.com:8000/wp-content/uploads/2019/10/tesla-gigafactory-3-late-sept-19-1-1024x513.jpg'}></img>
-		{/* </div> */}
-		</paper>
+		<Paper className = "Detail-article">
+			<Card className = {classes.root}>
+						<CardActionArea>
+							<CardMedia
+								className= {classes.media}
+								image="http://blog.eautoinfo.com:8000/wp-content/uploads/2019/10/tesla-gigafactory-3-late-sept-19-1-1024x513.jpg"
+								title="Local production for Tesla in China is being underestimated"
+							/>
+							<CardContent>
+								<Typography gutterBottom variant="h5" component="h2">
+									Local production for Tesla in China is being underestimated
+								</Typography>
+								<Typography variant="body2" color="textSecondary" component="p">
+									Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+									across all continents except Antarctica
+								</Typography>
+							</CardContent>
+						</CardActionArea>
+						<CardActions>
+							<Button size="small" color="primary">
+								Share
+							</Button>
+							<Button size="small" color="primary">
+								Learn More
+							</Button>
+						</CardActions>
+					</Card>
+		</Paper>
+		
 		
 	)
 }

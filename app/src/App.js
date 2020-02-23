@@ -187,7 +187,6 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-					{/* <sortbyContext.Provider sortby = {this.state.sortby}> */}
 						<Sort
 							onPriceChange={ this.handlePriceChange }
 							price={this.state.price}
@@ -198,7 +197,6 @@ class App extends Component {
 							filter_brands={ this.state.filter_brands }
 							onBrandChange={(brand) => this.handleBrandChange(brand)}
 						/>
-					{/* </sortbyContext.Provider> */}
 					
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }

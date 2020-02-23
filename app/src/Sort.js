@@ -74,7 +74,7 @@ class Sort extends Component {
 					}
 					{this.state.showBrandSelection &&
 						<BrandSelector 
-                            onClose={ () => this.handleClose() }
+              onClose={ () => this.handleClose() }
 							brands={this.props.brands}
 							filter_brands={this.props.filter_brands}
 							onBrandChange={ ( brand ) => this.props.onBrandChange( brand )}

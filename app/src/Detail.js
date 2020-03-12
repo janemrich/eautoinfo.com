@@ -30,10 +30,6 @@ class Detail extends React.Component {
 		showDetail: true,
 		redirectToBlog: false
   }
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = store.getState();
-	// }
 
   componentDidMount() {
     fetch('https://api.eautoinfo.com/cars/' + this.props.match.params.id)

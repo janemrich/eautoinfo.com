@@ -28,7 +28,7 @@ class BasicTextFields extends Component{
 
   constructor(props) {
     super(props);
-    this.state = store.getState();
+    this.state.display = store.getState().display;
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleStoreChange = this.handleStoreChange.bind(this);
     store.subscribe(this.handleStoreChange);
@@ -62,7 +62,7 @@ function TextFields(props) {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField value = {store.getState().display} id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField value = {props.display} id="outlined-basic" label="Outlined" variant="outlined" />
     </form>
   );
 }

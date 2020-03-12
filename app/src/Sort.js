@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'; 
 import { Paper, Box, Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -7,13 +6,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 import "./Sort.css";
 
-const sortbyContext = React.createContext("");
-
 class Sort extends Component {
 
-	static contextTypes = {
-    sortby: PropTypes.string
-  }
 	state = {
 		showBrandSelection: false,
 	}
@@ -69,7 +63,7 @@ class Sort extends Component {
 						Marken
 						</Button>
 						<Filters
-							sortby = {this.context.sortby}
+							sortby = {this.props.sortby}
 							onSortChange={(type) => this.props.onSortChange(type)}
 						/>
 					</>

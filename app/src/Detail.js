@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import {Bar} from './Bar.js'
 import './Detail.css';
 import { Redirect } from 'react-router';
-
+import BasicTextFields from './BasicTextFields.js';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,7 +13,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import store from './store';
 const useStyles = makeStyles({
   root: {
 		maxWidth: 400,
@@ -26,9 +26,9 @@ const useStyles = makeStyles({
 
 class Detail extends React.Component {
   state = {
-	cars: [],
-	showDetail: true,
-	redirectToBlog: false
+		cars: [],
+		showDetail: true,
+		redirectToBlog: false
   }
 
   componentDidMount() {
@@ -58,7 +58,8 @@ class Detail extends React.Component {
 					<Bar onClick={ () => this.handleMainClick()}
 					/>
 					<CarsListb cars={this.state.cars}/>
-					<Articles/>				
+					<Articles/>	
+					<BasicTextFields/>			
 				</div>
 		);
 	}
@@ -121,7 +122,7 @@ function CarCardb(props) {
 					+ ' ' + props.car.edition
 				}
 			</h1>
-			<img src={ 'https://api.eautoinfo.com' + props.car.thumbnail.url}></img>
+			<img className = "Detail-img" src={ 'https://api.eautoinfo.com' + props.car.thumbnail.url}></img>
 			<h2 className="Detail-price">
 				{ (props.car.price_de).toLocaleString('de-DE', {
 						style: 'currency',

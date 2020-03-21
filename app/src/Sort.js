@@ -6,6 +6,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 import "./Sort.css";
+import store from './store';
 
 class Sort extends Component {
 
@@ -14,6 +15,29 @@ class Sort extends Component {
   }
 	state = {
 		showBrandSelection: false,
+		// sortby: ""
+	}
+
+	constructor(props) {
+		super(props);
+		this.state.sortby = store.getState().sortby;
+		this.handleStoreChange = this.handleStoreChange.bind(this);
+    store.subscribe(this.handleStoreChange);
+	}
+
+	handleStoreChange() {
+    this.setState(store.getState());
+	}
+	
+	handleSortChange(type) {
+		// this.setState({
+		// 	sortby: type,
+		// })
+		const action = {
+      type: 'change_sortby_value',
+      value: type
+    }
+    store.dispatch(action);
 	}
 
 	handleClose() {
@@ -67,8 +91,9 @@ class Sort extends Component {
 						Marken
 						</Button>
 						<Filters
-							sortby = {this.context.sortby}
-							onSortChange={(type) => this.props.onSortChange(type)}
+							sortby = {this.state.sortby}
+							onSortChange={(type) => this.handleSortChange(type)}
+							// onSortChange={(type) => this.props.onSortChange(type)}
 						/>
 					</>
 					}

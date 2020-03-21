@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import store from './store';
 
 class App extends Component {
 	static childContextTypes = {
@@ -18,15 +19,22 @@ class App extends Component {
 		super(props);
 		this.handlePriceChange = this.handlePriceChange.bind(this);
 		this.handleRangeChange = this.handleRangeChange.bind(this);
+		this.handleStoreChange = this.handleStoreChange.bind(this);
+		store.subscribe(this.handleStoreChange);
+		this.state.sortby = store.getState().sortby;
 	}
-	
+
+	handleStoreChange() {
+    this.setState(store.getState());
+	}
+
 	state = {
 		cars: [],
 		carsToCompare: [],
 		toDetail: null,
 		price: "",
 		range: "",
-		sortby: "",
+		// sortby: "",
 		filter_brands: [],
 	}
 
@@ -85,13 +93,7 @@ class App extends Component {
 		})
 	}
 
-	handleSortChange(type) {
-		this.setState({
-			sortby: type,
-		})
-	}
-
-	selectCarList(cars) {
+	selectCarList(cars, sortby) {
 		let filtered_cars =
 			cars.filter(
 				car => car.price_de > this.state.price
@@ -103,7 +105,7 @@ class App extends Component {
 				car => car.manufacturer != brand
 			)
 		}
-		switch (this.state.sortby) {
+		switch (sortby) {
 			case 'price':
 				return filtered_cars.sort(
 					(a, b) => (a.price_de > b.price_de) ? 1 : -1
@@ -192,14 +194,15 @@ class App extends Component {
 							price={this.state.price}
 							onRangeChange={ this.handleRangeChange }
 							range={this.state.range}
-							onSortChange={(type) => this.handleSortChange(type)}
+							// sortby = {this.state.sortby}
+							// onSortChange={(type) => this.handleSortChange(type)}
 							brands={ this.getBrands() }
 							filter_brands={ this.state.filter_brands }
 							onBrandChange={(brand) => this.handleBrandChange(brand)}
 						/>
 					
 					<CarsList
-						cars={ this.selectCarList(this.state.cars) }
+						cars={ this.selectCarList(this.state.cars, this.state.sortby) }
 						onClick={(id) => this.handleCardClick(id)}
 						onAddClick={(id) => this.handleAddClick(id) }
 					/>

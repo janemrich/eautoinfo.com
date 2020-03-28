@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import store from './store';
 import ContainedButtons from './Button.js';
+// import {actionTypes} from './store/actionTypes';
+import {getInputChangeAction} from './store/actionCreator';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,10 +37,11 @@ class BasicTextFields extends Component{
   }
 
   handleButtonClick(){
-    const action = {
-      type: 'change_input_value',
-      value: 'OK'
-    }
+    // const action = {
+    //   type: actionTypes.CHANGE_INPUT_CHANGE,
+    //   value: 'OK'
+    // }
+    const action = getInputChangeAction('OK');
     store.dispatch(action);
     
   }

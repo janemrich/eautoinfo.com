@@ -15,39 +15,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const useStyles1 = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
 class BasicTextFields extends Component{
   state = {
     display: 'Not OK'
-  }
-
-  constructor(props) {
-    super(props);
-    this.state.display = store.getState().display;
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.handleStoreChange = this.handleStoreChange.bind(this);
-    store.subscribe(this.handleStoreChange);
-  }
-
-  handleButtonClick(){
-    // const action = {
-    //   type: actionTypes.CHANGE_INPUT_CHANGE,
-    //   value: 'OK'
-    // }
-    const action = getInputChangeAction('OK');
-    store.dispatch(action);
-    
-  }
-
-  handleStoreChange() {
-    this.setState(store.getState());
   }
 
   render() {

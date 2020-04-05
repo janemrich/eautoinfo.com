@@ -14,6 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import store from './store';
+import { Provider } from 'react-redux';
 const useStyles = makeStyles({
   root: {
 		maxWidth: 400,
@@ -59,7 +60,10 @@ class Detail extends React.Component {
 					/>
 					<CarsListb cars={this.state.cars}/>
 					<Articles/>	
-					<BasicTextFields/>			
+					<Provider store = {store}>
+						<BasicTextFields/>
+					</Provider>
+								
 				</div>
 		);
 	}

@@ -7,6 +7,9 @@ import { Redirect } from "react-router";
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import { Provider } from 'react-redux';
+import { initCarsAction } from './store/actionCreator';
+import store from './store';
 
 class App extends Component {
 
@@ -14,10 +17,13 @@ class App extends Component {
 		super(props);
 		this.handlePriceChange = this.handlePriceChange.bind(this);
 		this.handleRangeChange = this.handleRangeChange.bind(this);
+		this.handleStoreChange = this.handleStoreChange.bind(this);
+		store.subscribe(this.handleStoreChange);
+		this.state.cars = store.getState().cars;
 	}
 	
 	state = {
-		cars: [],
+		// cars: [],
 		carsToCompare: [],
 		toDetail: null,
 		price: "",
@@ -54,10 +60,16 @@ class App extends Component {
         fetch('https://api.eautoinfo.com/cars')
         .then(res => res.json())
         .then((data) => {
-        	this.setState({ cars: data })
+					// this.setState({ cars: data })
+					const action = initCarsAction(data);
+					store.dispatch(action);
 		})
 		.catch(console.log);
-    }
+		}
+		
+	handleStoreChange(){
+		this.setState(store.getState());
+	}
 
 	handleMainClick() {
 		this.setState({
@@ -127,7 +139,7 @@ class App extends Component {
 
 	getBrands() {
 		let brands = new Set(
-			this.state.cars.map( car => car.manufacturer)
+			store.getState().cars.map( car => car.manufacturer)
 		)
 		return brands
 	}

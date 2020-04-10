@@ -7,10 +7,8 @@ import { Redirect } from "react-router";
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
-import { Provider } from 'react-redux';
 import { getCarsList } from './store/actionCreator';
 import store from './store';
-
 
 class App extends Component {
 
@@ -20,7 +18,7 @@ class App extends Component {
 		this.handleRangeChange = this.handleRangeChange.bind(this);
 		this.handleStoreChange = this.handleStoreChange.bind(this);
 		store.subscribe(this.handleStoreChange);
-		this.state.cars = store.getState().cars;
+		this.state = store.getState();
 	}
 	
 	state = {
@@ -29,7 +27,7 @@ class App extends Component {
 		toDetail: null,
 		price: "",
 		range: "",
-		sortby: "",
+		// sortby: "",
 		filter_brands: [],
 	}
 	
@@ -85,11 +83,11 @@ class App extends Component {
 		})
 	}
 
-	handleSortChange(type) {
-		this.setState({
-			sortby: type,
-		})
-	}
+	// handleSortChange(type) {
+	// 	this.setState({
+	// 		sortby: type,
+	// 	})
+	// }
 
 	selectCarList(cars) {
 		let filtered_cars =
@@ -187,18 +185,17 @@ class App extends Component {
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-						<Sort
-							onPriceChange={ this.handlePriceChange }
+					<Sort
+							// onPriceChange={ this.handlePriceChange }
 							price={this.state.price}
 							onRangeChange={ this.handleRangeChange }
 							range={this.state.range}
-							sortby = {this.state.sortby}
-							onSortChange={(type) => this.handleSortChange(type)}
+							// sortby = {this.state.sortby}
+							// onSortChange={(type) => this.handleSortChange(type)}
 							brands={ this.getBrands() }
 							filter_brands={ this.state.filter_brands }
 							onBrandChange={(brand) => this.handleBrandChange(brand)}
 						/>
-					
 					<CarsList
 						cars={ this.selectCarList(this.state.cars) }
 						onClick={(id) => this.handleCardClick(id)}

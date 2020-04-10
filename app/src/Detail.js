@@ -60,9 +60,9 @@ class Detail extends React.Component {
 					/>
 					<CarsListb cars={this.state.cars}/>
 					<Articles/>	
-					<Provider store = {store}>
+					{/* <Provider store = {store}> */}
 						<BasicTextFields/>
-					</Provider>
+					{/* </Provider> */}
 								
 				</div>
 		);

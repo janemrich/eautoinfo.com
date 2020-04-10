@@ -8,12 +8,17 @@ import Detail from './Detail';
 import Compare from './Compare';
 import * as serviceWorker from './serviceWorker';
 
+import store from './store';
+import { Provider } from 'react-redux';
+
 const routing = (
     <Router>
         <div>
-            <Route exact path="/" component={App} />
-            <Route path="/car/:id" component={Detail} />
-            <Route path="/compare" component={Compare} />
+            <Provider store = {store}>
+                <Route exact path="/" component={App} />
+                <Route path="/car/:id" component={Detail} />
+                <Route path="/compare" component={Compare} />
+                </Provider>
         </div>
     </Router>
 )

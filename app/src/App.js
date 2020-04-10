@@ -8,8 +8,9 @@ import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { Provider } from 'react-redux';
-import { initCarsAction } from './store/actionCreator';
+import { getCarsList } from './store/actionCreator';
 import store from './store';
+
 
 class App extends Component {
 
@@ -57,14 +58,9 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-        fetch('https://api.eautoinfo.com/cars')
-        .then(res => res.json())
-        .then((data) => {
-					// this.setState({ cars: data })
-					const action = initCarsAction(data);
-					store.dispatch(action);
-		})
-		.catch(console.log);
+		const action = getCarsList();
+		store.dispatch(action);
+		console.log(action);
 		}
 		
 	handleStoreChange(){

@@ -4,6 +4,16 @@ export const getInputChangeAction = (value) => ({
   value
 });
 
+export const getSortbyChangeAction = (value) => ({
+  type: actionTypes.CHANGE_SORTBY_VALUE,
+  value
+});
+
+export const getPriceChangeAction = (value) => ({
+  type: actionTypes.CHANGE_PRICE_VALUE,
+  value
+});
+
 export const initCarsAction = (data) => ({
   type: actionTypes.INIT_CARS_VALUE,
   data

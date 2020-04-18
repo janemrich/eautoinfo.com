@@ -21,6 +21,11 @@ export default (state = defaultState, action) => {
     newState.sortby = action.value;
     return newState;
   }
+  if (action.type === actionTypes.CHANGE_PRICE_VALUE) {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.price = action.value;
+    return newState;
+  }
   if (action.type === actionTypes.INIT_CARS_VALUE) {
     const newState = JSON.parse(JSON.stringify(state));
     newState.cars = action.data;

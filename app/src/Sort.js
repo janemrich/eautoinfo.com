@@ -6,7 +6,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 import "./Sort.css";
 import {connect} from 'react-redux';
-import { getSortbyChangeAction} from './store/actionCreator';
+import { getSortbyChangeAction, getPriceChangeAction} from './store/actionCreator';
 
 
 class Sort extends Component {
@@ -27,10 +27,8 @@ class Sort extends Component {
 		})
 	}	
 	
-	
 	render() {
-		return (
-			
+		return (			
 			<Paper className="filters">
 				<Box className="filter-inputs">
 					{!this.state.showBrandSelection &&
@@ -42,7 +40,7 @@ class Sort extends Component {
 								variant="outlined"
 								label="Preis ab"
 								value={this.props.price}
-								onChange={ this.props.onPriceChange }
+								onChange={ this.props.handlePriceChange }
 								InputProps={{
 								startAdornment: <InputAdornment position="start">€</InputAdornment>,
 								}}
@@ -181,7 +179,8 @@ function BrandSelector(props) {
 
 const mapStateToProps = (state) => {
   return {
-    sortby: state.sortby
+		sortby: state.sortby,
+		price: state.price
   }
 }
 
@@ -192,7 +191,13 @@ const mapDispatchToProps = (dispatch) => {
       const action = getSortbyChangeAction(type);
       dispatch(action);
 		},
-		
+		handlePriceChange(event) {
+			// this.setState({
+			// 	price: event.target.value,
+			// })
+			const action = getPriceChangeAction(event.target.value);
+			dispatch(action);
+		}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Sort);

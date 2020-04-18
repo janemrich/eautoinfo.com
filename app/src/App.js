@@ -14,7 +14,7 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
-		this.handlePriceChange = this.handlePriceChange.bind(this);
+		// this.handlePriceChange = this.handlePriceChange.bind(this);
 		this.handleRangeChange = this.handleRangeChange.bind(this);
 		this.handleStoreChange = this.handleStoreChange.bind(this);
 		store.subscribe(this.handleStoreChange);
@@ -25,7 +25,7 @@ class App extends Component {
 		// cars: [],
 		carsToCompare: [],
 		toDetail: null,
-		price: "",
+		// price: "",
 		range: "",
 		// sortby: "",
 		filter_brands: [],
@@ -71,11 +71,11 @@ class App extends Component {
 		})
 	}
 
-	handlePriceChange(event) {
-		this.setState({
-			price: event.target.value,
-		})
-	}
+	// handlePriceChange(event) {
+	// 	this.setState({
+	// 		price: event.target.value,
+	// 	})
+	// }
 
 	handleRangeChange(event) {
 		this.setState({

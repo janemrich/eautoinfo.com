@@ -40,7 +40,7 @@ class Sort extends Component {
 								variant="outlined"
 								label="Preis ab"
 								value={this.props.price}
-								onChange={ this.props.handlePriceChange }
+								onChange={ this.props.onPriceChange }
 								InputProps={{
 								startAdornment: <InputAdornment position="start">€</InputAdornment>,
 								}}
@@ -67,7 +67,7 @@ class Sort extends Component {
 						</Button>
 						<Filters
 							sortby = {this.props.sortby}
-							onSortChange={(type) => this.props.handleSortChange(type)}
+							onSortChange={this.props.onSortChange}
 						/>
 					</>
 					}
@@ -76,7 +76,7 @@ class Sort extends Component {
               onClose={ () => this.handleClose() }
 							brands={this.props.brands}
 							filter_brands={this.props.filter_brands}
-							onBrandChange={ ( brand ) => this.props.onBrandChange( brand )}
+							onBrandChange={this.props.onBrandChange}
 						/>
 					}
 				</Box>
@@ -177,27 +177,4 @@ function BrandSelector(props) {
 	)
 }
 
-const mapStateToProps = (state) => {
-  return {
-		sortby: state.sortby,
-		price: state.price
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-		
-    handleSortChange(type) {
-      const action = getSortbyChangeAction(type);
-      dispatch(action);
-		},
-		handlePriceChange(event) {
-			// this.setState({
-			// 	price: event.target.value,
-			// })
-			const action = getPriceChangeAction(event.target.value);
-			dispatch(action);
-		}
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Sort);
+export default Sort;

@@ -113,6 +113,7 @@ function CarCard(props) {
 }
 
 export function CarsList(props) {
+	console.log("Carslist", props);
 	const carsCards = props.cars.map(car => <CarCard
 												car={car}
 												onClick={(id) => props.onClick(id) }

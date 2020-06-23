@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import store from './store';
 import ContainedButtons from './Button.js';
-
+import {connect} from 'react-redux';
+import {getInputChangeAction} from './store/actionCreator';
+ 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -13,38 +15,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 class BasicTextFields extends Component{
   state = {
     display: 'Not OK'
   }
 
-  constructor(props) {
-    super(props);
-    this.state.display = store.getState().display;
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.handleStoreChange = this.handleStoreChange.bind(this);
-    store.subscribe(this.handleStoreChange);
-  }
-
-  handleButtonClick(){
-    const action = {
-      type: 'change_input_value',
-      value: 'OK'
-    }
-    store.dispatch(action);
-    
-  }
-
-  handleStoreChange() {
-    this.setState(store.getState());
-  }
-
   render() {
     return (
       <div>
-        <TextFields display = {this.state.display}/>
-        <ContainedButtons onClick={ () => this.handleButtonClick()}/>
+        <TextFields display = {this.props.display}/>
+        <ContainedButtons onClick={ () => this.props.handleButtonClick()}/>
       </div>
     )
   }
@@ -59,4 +39,18 @@ function TextFields(props) {
     </form>
   );
 }
- export default BasicTextFields
+const mapStateToProps = (state) => {
+  return {
+    display: state.display
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleButtonClick() {
+      const action = getInputChangeAction('OK');
+      dispatch(action);
+    }
+  }
+}
+ export default connect(mapStateToProps, mapDispatchToProps)(BasicTextFields);

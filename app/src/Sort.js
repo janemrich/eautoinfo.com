@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'; 
 import { Paper, Box, Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 import "./Sort.css";
-import store from './store';
+import {connect} from 'react-redux';
+import { getSortbyChangeAction, getPriceChangeAction} from './store/actionCreator';
+
 
 class Sort extends Component {
 
-	static contextTypes = {
-    sortby: PropTypes.string
-  }
 	state = {
 		showBrandSelection: false,
 		// sortby: ""
@@ -51,9 +49,9 @@ class Sort extends Component {
 			showBrandSelection: true,
 		})
 	}	
-
+	
 	render() {
-		return (
+		return (			
 			<Paper className="filters">
 				<Box className="filter-inputs">
 					{!this.state.showBrandSelection &&
@@ -91,9 +89,8 @@ class Sort extends Component {
 						Marken
 						</Button>
 						<Filters
-							sortby = {this.state.sortby}
-							onSortChange={(type) => this.handleSortChange(type)}
-							// onSortChange={(type) => this.props.onSortChange(type)}
+							sortby = {this.props.sortby}
+							onSortChange={this.props.onSortChange}
 						/>
 					</>
 					}
@@ -102,11 +99,12 @@ class Sort extends Component {
               onClose={ () => this.handleClose() }
 							brands={this.props.brands}
 							filter_brands={this.props.filter_brands}
-							onBrandChange={ ( brand ) => this.props.onBrandChange( brand )}
+							onBrandChange={this.props.onBrandChange}
 						/>
 					}
 				</Box>
 			</Paper>
+			
 		);
 	}
 }
@@ -114,7 +112,7 @@ class Sort extends Component {
 function Filters(props) {
 	return (
 		<div className="filter-sort">
-			<FilterListIcon /> 
+			<FilterListIcon />  
 						<Chip
 							className="filter-chip"
 							{...((props.sortby == 'price') ? {color: 'primary'} : {})}
@@ -158,7 +156,7 @@ function Filters(props) {
 							onClick={ () => props.onSortChange('acceleration')}
 						/>
 		</div>
-	);
+	)
 }
 
 function BrandSelector(props) {

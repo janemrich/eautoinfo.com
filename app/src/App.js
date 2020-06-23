@@ -4,108 +4,88 @@ import { CarsList } from './Cars.js';
 import { Bar } from './Bar.js';
 import Sort from './Sort.js';
 import { Redirect } from "react-router";
-import PropTypes from 'prop-types'; 
 import { Paper, Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import { getCarsList } from './store/actionCreator';
 import store from './store';
+import { withQueryState } from "./hooks";
 
 class App extends Component {
-	static childContextTypes = {
-    sortby: PropTypes.string
-	}
 
 	constructor(props) {
 		super(props);
-		this.handlePriceChange = this.handlePriceChange.bind(this);
-		this.handleRangeChange = this.handleRangeChange.bind(this);
-		this.handleStoreChange = this.handleStoreChange.bind(this);
-		store.subscribe(this.handleStoreChange);
-		this.state.sortby = store.getState().sortby;
-	}
-
-	handleStoreChange() {
-    this.setState(store.getState());
-	}
-
-	state = {
-		cars: [],
-		carsToCompare: [],
-		toDetail: null,
-		price: "",
-		range: "",
-		// sortby: "",
-		filter_brands: [],
-	}
-
-	getChildContext () {
-    return { sortby: this.state.sortby }
+		this.state = {
+			cars: [],
+			carsToCompare: [],
+		};
 	}
 	
-	handleCardClick(id) {
-		this.setState({
+	handleCardClick = (id) => {
+		this.props.setQueryState({
 			toDetail: id,
-		})
-	}
+		});
+	};
 
-	handleAddClick(id) {
+	handleAddClick = (id) => {
 		this.setState({
 			carsToCompare: this.state.carsToCompare.concat(
 				this.state.cars.find(
-					car => car.id == id
+					car => car.id === id
 				)
 			),
-		})
-	}
+		});
+	};
 
-	handleDelete(id) {
+	handleDelete = (id) => {
 		this.setState({
 			carsToCompare: this.state.carsToCompare.filter(
 				car => car.id !== id
 			)
-		})
-	}
+		});
+	};
 
 	componentDidMount() {
-        fetch('https://api.eautoinfo.com/cars')
-        .then(res => res.json())
-        .then((data) => {
-        	this.setState({ cars: data })
-		})
-		.catch(console.log);
-    }
+		getCarsList()(res => this.setState({cars: res.data}));
+	};
 
-	handleMainClick() {
-		this.setState({
+	handleMainClick = () => {
+		this.props.setQueryState({
 			toDetail: null,
-		})
-	}
+		});
+	};
 
-	handlePriceChange(event) {
-		this.setState({
+	handlePriceChange = (event) => {
+		this.props.setQueryState({
 			price: event.target.value,
-		})
-	}
+		});
+	};
 
-	handleRangeChange(event) {
-		this.setState({
+	handleRangeChange = (event) => {
+		this.props.setQueryState({
 			range: event.target.value,
-		})
-	}
+		});
+	};
 
-	selectCarList(cars, sortby) {
+	handleSortChange = (type) => {
+		this.props.setQueryState({
+			sortby: type,
+		})
+	};
+
+	selectCarList() {
 		let filtered_cars =
-			cars.filter(
-				car => car.price_de > this.state.price
+			this.state.cars.filter(
+				car => car.price_de > this.props.queryState.price
 			).filter(
-				car => car.range_wlpt > this.state.range
+				car => car.range_wlpt > this.props.queryState.range
 			);
-		for (let brand of this.state.filter_brands) {
+		for (let brand of this.props.queryState.filter_brands) {
 			filtered_cars = filtered_cars.filter(
 				car => car.manufacturer != brand
-			)
+			);
 		}
-		switch (sortby) {
+		switch (this.props.queryState.sortby) {
 			case 'price':
 				return filtered_cars.sort(
 					(a, b) => (a.price_de > b.price_de) ? 1 : -1
@@ -138,24 +118,26 @@ class App extends Component {
 	getBrands() {
 		let brands = new Set(
 			this.state.cars.map( car => car.manufacturer)
-		)
-		return brands
+		);
+		return brands;
 	}
 
-	handleBrandChange( brand ) {
-		if (brand == 'alle') {
-			this.setState({
-				filter_brands: []
-			})
-			return;
-		}
-		if (brand == 'keine') {
-			this.setState({
+	handleBrandChange = ( brand ) => {
+		if (brand === 'alle') {
+			this.props.setQueryState({
 				filter_brands: Array.from(this.getBrands())
-			})
+			});
 			return;
 		}
-		let brands = this.state.filter_brands;
+		if (brand === 'keine') {
+			this.props.setQueryState({
+				filter_brands: []
+			});
+			return;
+		}
+
+		let brands = this.props.queryState.filter_brands;
+		
 		if (brands.includes(brand)) {
 			brands = brands.filter(
 				f_brand => f_brand != brand
@@ -163,46 +145,46 @@ class App extends Component {
 		} else {
 			brands.push(brand)
 		}
-		this.setState({
+		
+		this.props.setQueryState({
 			filter_brands: brands
 		});
-	}
+	};
 
-	handleCompareClick() {
-		this.setState({
+	handleCompareClick = () => {
+		this.props.setQueryState({
 			toComparison: true,
 		})
-	}
+	};
 
 	render() {
-		if (this.state.toDetail) {
-			return <Redirect to={'/car/' + this.state.toDetail} />
+		if (this.props.queryState.toDetail) {
+			return <Redirect to={'/car/' + this.props.queryState.toDetail} />
 		}
-		if (this.state.toComparison) {
+		if (this.props.queryState.toComparison) {
 			return <Redirect to={{
 								pathname: '/compare/',
 								state: {cars: this.state.carsToCompare}
 							}}
 					/>
 		}
-
+		const filteredCars = this.selectCarList() || [];
 		return (
 				<div className="App">
 					<Bar onClick={ () => this.handleMainClick()}/>
-						<Sort
+					<Sort
 							onPriceChange={ this.handlePriceChange }
-							price={this.state.price}
+							price={this.props.queryState.price}
 							onRangeChange={ this.handleRangeChange }
-							range={this.state.range}
-							// sortby = {this.state.sortby}
-							// onSortChange={(type) => this.handleSortChange(type)}
+							range={this.props.queryState.range}
+							sortby={this.props.queryState.sortby}
+							onSortChange={this.handleSortChange}
 							brands={ this.getBrands() }
-							filter_brands={ this.state.filter_brands }
-							onBrandChange={(brand) => this.handleBrandChange(brand)}
+							filter_brands={ this.props.queryState.filter_brands }
+							onBrandChange={ this.handleBrandChange }
 						/>
-					
 					<CarsList
-						cars={ this.selectCarList(this.state.cars, this.state.sortby) }
+						cars={ filteredCars }
 						onClick={(id) => this.handleCardClick(id)}
 						onAddClick={(id) => this.handleAddClick(id) }
 					/>
@@ -243,4 +225,13 @@ function CompareBox(props) {
 }
 
 
-export default App;
+export default withQueryState(App,
+	{
+		carsToCompare: [],
+		toDetail: null,
+		price: "",
+		range: "",
+		sortby: "",
+		filter_brands: [],
+	}
+);

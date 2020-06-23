@@ -1,3 +1,4 @@
+import {actionTypes} from './actionTypes';
 const defaultState = {
   display: "Not OK",
   cars: [],
@@ -10,14 +11,24 @@ const defaultState = {
 }
 
 export default (state = defaultState, action) => {
-  if (action.type === 'change_input_value') {
+  if (action.type === actionTypes.CHANGE_INPUT_CHANGE) {
     const newState = JSON.parse(JSON.stringify(state));
     newState.display = action.value;
     return newState;
   }
-  if (action.type === 'change_sortby_value') {
+  if (action.type === actionTypes.CHANGE_SORTBY_VALUE) {
     const newState = JSON.parse(JSON.stringify(state));
     newState.sortby = action.value;
+    return newState;
+  }
+  if (action.type === actionTypes.CHANGE_PRICE_VALUE) {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.price = action.value;
+    return newState;
+  }
+  if (action.type === actionTypes.INIT_CARS_VALUE) {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.cars = action.data;
     return newState;
   }
   console.log(state, action);

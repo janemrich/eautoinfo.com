@@ -21,7 +21,7 @@ import './Bar.css';
   }));
   
 export function Bar(props) {
-  console.log(props);
+	console.log(props);
   const classes = useStyles();
 
   return (

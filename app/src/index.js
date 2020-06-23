@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Route, BrowserRouter as Router , Redirect} from 'react-router-dom'
-import AppWithQueryState from './App';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import App from './App';
 import Detail from './Detail';
 import Compare from './Compare';
 import * as serviceWorker from './serviceWorker';
@@ -15,10 +15,9 @@ const routing = (
     <Router>
         <div>
             <Provider store = {store}>
+                <Route exact path="/" component={App} />
                 <Route path="/car/:id" component={Detail} />
                 <Route path="/compare" component={Compare} />
-                <Route path="/cars" component={AppWithQueryState} />
-                <Route exact path="/"> <Redirect to="/cars" /></Route>
                 </Provider>
         </div>
     </Router>
